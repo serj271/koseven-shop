@@ -1,0 +1,15 @@
+<div class="page-header">
+	<h1>{{headline}}</h1>
+</div>
+
+<form accept-charset="{{charset}}" action="" method="POST">
+	<p>
+	Are you sure you want to update of shopping cart quantity up  #{{updated_value}}?
+	</p>
+	<input type="hidden" name='token' value="{{token}}" />	
+	<input type="hidden" name='quantity' value="{{updated_value}}" />
+	<div class="well">
+		<button class="btn large success" name="action" type="submit" value="yes">Yes</button>
+		<button class="btn large error" name="action" type="submit" value="no">No</button>
+	</div>
+</form>

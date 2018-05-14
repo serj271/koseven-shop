@@ -1,0 +1,19 @@
+<div id="result">
+	<form class="form" id="upload-form" action={{toForm}}  method="post" enctype="multipart/form-data">
+	    <h3>{{title}}</h3>
+		<p>Choose file:</p>
+		<p><input type="file" name="file" id="file" class="form-control" /></p>
+
+	    <div class="form-group">
+		<label for="description" class="control-label">Description</label>
+		<div class="controls">
+			<input type="text" id="description" class="span6" name="description" />
+		</div>
+	    </div>	
+
+	    <div class="form-group">
+		<input type="hidden" name="hidden" value="avatar" />
+		<button class="btn btn-primary" type="submit">{{button}}</button>
+	    </div>
+	</form>
+</div>

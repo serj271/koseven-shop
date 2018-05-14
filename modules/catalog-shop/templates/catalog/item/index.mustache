@@ -1,0 +1,46 @@
+
+
+{{#item}}
+<div class="wrapper">
+	<header id="header"></header>
+	<section id="midsection" class="container">
+		<div class="row"> 
+			<div id="content-home" class="span12">
+				<section id="featured" class="featured span">
+					<h2>Featured</h2>
+					<div class="box-content hidden-phone">					   
+						<div class="box-product row-fluid">	      
+							<div class="span3  span-first-child">
+								<div class="pbox">
+									<div class="image"><span class="sale-icon">Sale</span>
+										<a href="#">
+											<img src="{{image}}" alt="Sample Plush" />
+										</a>
+									</div>
+									<div style="display:none" class="description hidden-phone hidden-tablet">Donec porta enim sit amet augue iaculis eu sollicitudin ligula pharetra. Ut nec dui nec nisi cons..
+									</div>
+									<div style="display:none" class="rating hidden-phone hidden-tablet">
+										<img src="{{image}}" alt="Based on 2 reviews." />
+									</div>  
+									<div class="name">
+										<a href="{{uri}}">{{description}}</a>
+									</div>
+									<div class="price">
+										<span class="price-old">$43.90</span> <span class="price-new">{{price}}</span>
+									</div>
+										<!--         <div class="rating">
+								<img src="catalog/view/theme/sellya/image/stars/stars1-5.png" alt="Based on 2 reviews." />
+								</div>
+								 -->
+									<div class="cart"><input type="button" value="Add to Cart" onclick="addToCart('50');" class="button"></div>
+								</div>
+							</div>							  
+							
+						</div>
+					</div>
+				</section>
+			</div>
+		</div>	
+	</section>
+</div>
+{{/item}}

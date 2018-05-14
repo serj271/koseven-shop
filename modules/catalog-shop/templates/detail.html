@@ -1,0 +1,148 @@
+<main id="terms">
+	<div class="">
+		<h1>Buy{{description}}</h1>
+		<div id="single-product" class="">
+			<div class="container">
+				<div class="no-margin col-xs-12 col-sm-6 col-md-5 gallery-holder">
+					<div class="product-item-holder size-big single-product-gallery small-gallery">  
+						<div id="owl-single-product" class="image owl-carousel owl-theme" style="opacity: 1; display: block;">
+							<div class="owl-wrapper-outer">
+								<div class="owl-wrapper" style="width: 866px; left: 0px; display: block;">
+									<div class="owl-item" style="width: 433px;">
+										<div class="single-product-gallery-item" id="slide1">
+											<a href={{href}} rel="prettyPhoto[pp_gal]">
+												<img class="img-responsive" src={{src}}/>
+											</a>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- /.single-product-gallery-item -->		        
+						</div>
+						<!-- /.single-product-slider -->
+						<div class="single-product-gallery-thumbs gallery-thumbs">
+							<div id="owl-single-product-thumbnails" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
+								<div class="owl-wrapper-outer">
+									<div class="owl-wrapper" style="width: 216px; left: 0px; display: block;">
+										<div class="owl-item" style="width: 108px;">
+											<a class="horizontal-thumb active" data-target="#owl-single-product" data-slide="0" href="#slide1">
+											<img alt="" src="" />
+											</a>
+										</div>
+									</div>
+								</div> 
+							</div><!-- /#owl-single-product-thumbnails -->
+							<div class="nav-holder left hidden-xs">
+								<a class="prev-btn slider-prev" data-target="#owl-single-product-thumbnails" href="#prev"></a>
+							</div><!-- /.nav-holder -->
+							<div class="nav-holder right hidden-xs">
+								<a class="next-btn slider-next" data-target="#owl-single-product-thumbnails" href="#next"></a>
+							</div><!-- /.nav-holder -->
+						</div><!-- /.gallery-thumbs -->
+					</div><!-- /.single-product-gallery -->
+				</div><!-- /.gallery-holder -->        
+				<div class="no-margin col-xs-12 col-sm-7 body-holder">
+					<div class="body">
+						<div class="title">
+							<h1 data-product="2">{{title}}</h1>
+						</div>
+						<div class="brand">{{}}</div>
+						<div class="korpus">type of corpus</div> 
+						<div class="excerpt">              
+						</div>  	                                                                                                                   
+						<!-- select variant of product  -->
+						<form class="variants" action="/cart">	        
+							<div class="prices">
+								<div class="price-current">
+									<span class="pr">{{price}}</span>rubles
+								</div>                          
+							</div>
+							<span class="availability">count from stockhouse:             	 
+								<span>{{}}</span> 
+							</span>
+							<div class="availability">
+								<div class="le-select sel" style="display:none;">
+									<!-- select variant of product -->
+									<select name="variant" class="hasCustomSelect" style="-webkit-appearance: menulist-button; width: 0px; position: absolute; opacity: 0; height: 0px; font-size: 13px;">
+										<option value="2" price="2">				
+										</option>
+									</select>
+									<span class="le-select-in" style="display: inline-block;">
+										<span class="le-select-inInner">						
+										</span>
+									</span>
+								</div>
+							</div>		  
+							<div class="clearfix"></div>
+							<div class="qnt-holder">
+								<div class="le-quantity">
+									<a class="minus" href="#reduce"></a>
+									<input name="amount" readonly="readonly" type="text" value="1" />
+									<a class="plus" href="#add"></a>
+								</div>
+								<button id="addto-cart" type="submit" class="le-button huge">to basket</button>
+							</div><!-- /.qnt-holder -->   
+						</form>
+					</div><!-- /.body -->
+				</div><!-- /.body-holder -->
+			</div><!-- /.container -->
+		</div><!-- /.single-product -->
+	<!-- ========================================= SINGLE PRODUCT TAB ========================================= -->
+		<section id="single-product-tab">
+			<div class="container">
+				<div class="tab-holder">            
+					<ul class="nav nav-tabs simple">
+						<li class="active"><a href="#description" data-toggle="tab">description</a></li>
+						<li><a href="#reviews" data-toggle="tab">comment {{countCommment}}</a></li>
+					</ul><!-- /.nav-tabs -->
+					<div class="tab-content">
+						<div class="tab-pane active" id="description">                    	
+						</div><!-- /.tab-pane #description -->	
+						<div class="tab-pane" id="reviews">
+							<div class="comments">
+								<p>no comment</p>	                    
+							</div><!-- /.comments -->
+							<div class="add-review row">
+								<div class="col-sm-8 col-xs-12">
+									<div class="new-review-form">
+										<h2>write comment</h2>
+										<!-- form send comment -->	
+										<form id="contact-form" class="contact-form" method="post">
+												<div class="row field-row">
+													<div class="col-xs-12 col-sm-4">
+														<label>name</label>
+														<input class="le-input" type="text" id="comment_name" name="name" value="" data-format=".+" data-notice="input name"/>
+													</div>
+													<div class="col-xs-12 col-sm-4"><br>
+														<div class="g-recaptcha" data-sitekey="">
+															<div style="width: 304px; height: 78px;">
+																<div>
+																	<iframe src="https://www.google.com/recaptcha/api2/anchor?k=6LcptBoUAAAAAMPqJgGmqFF_Mih4zH0H_ow9N7pB&amp;co=aHR0cDovL3JpazE3NC5ydTo4MA..&amp;hl=en&amp;v=r20170503135251&amp;size=normal&amp;cb=4abeighxfeqk" title="recaptcha widget" width="304" height="78" frameborder="0" scrolling="no" name="undefined">
+																	</iframe>
+																</div>
+																<textarea id="g-recaptcha-response" name="g-recaptcha-response" class="g-recaptcha-response" style="width: 250px; height: 40px; border: 1px solid #c1c1c1; margin: 10px 25px; padding: 0px; resize: none;  display: none; ">
+																</textarea>
+															</div>
+														</div>
+													</div>										 
+												</div><!-- /.field-row -->
+												<div class="field-row">
+													<label>your cooment</label>
+													<textarea rows="8" class="le-input" name="text" data-format=".+" data-notice="inpur comment">
+													</textarea>
+												</div><!-- /.field-row -->
+												<div class="buttons-holder">
+													<button type="submit" class="le-button huge" name="comment" value="send">Send</button>
+												</div><!-- /.buttons-holder -->
+										</form><!-- /.contact-form -->
+									</div><!-- /.new-review-form -->
+								</div><!-- /.col -->
+							</div><!-- /.add-review -->
+						</div><!-- /.tab-pane #reviews -->
+					</div><!-- /.tab-content -->
+				</div><!-- /.tab-holder -->
+			</div><!-- /.container -->
+		</section><!-- /#single-product-tab -->
+		<!-- ========================================= SINGLE PRODUCT TAB : END ========================================= -->
+	</div>
+</main>

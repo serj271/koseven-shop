@@ -1,0 +1,66 @@
+<div id="result" >
+<form action={{toForm}} role="form"  method="POST">
+{{# results}}
+	<div class="form-group">
+		<label for="id">{{labelId}}</label>
+		
+			<input type="text" id="id" name="id" value="{{id}}" class="form-control" disabled/>
+		
+	</div>
+	<div class="form-group">
+		<label for="phone">{{labelPhone}}</label>
+		
+			<input type="text" id="phone" name="phone" value="{{phone}}" class="form-control" disabled />
+		
+	</div>
+
+	<div class="form-group">
+		<label for="department">{{labelDepartment}}</label>
+		
+			<input type="text" id="department" name="department" value="{{department}}" class="form-control" disabled />
+		
+	</div>
+	<div class="form-group">
+		<label for="name">{{labelName}}</label>
+		
+			<input type="text" id="name" name="name" value="{{full_name}}" class="form-control" disabled />
+		
+	</div>	
+	<div class="form-group">
+		<label for="username">Username</label>
+		
+			<input type="text" id="username" name="username" value="{{username}}" class="form-control" />
+			<span class="help-inline error">{{usernameError}}</span>
+		
+	</div>
+	<div class="form-group">
+		<label for="email">Email</label>
+	
+			<input type="text" id="email" name="email" value="{{email_zimbra}}" class="form-control" readonly/>
+			<span class="help-inline error">{{emailError}}</span>
+		
+	</div>
+	<div class="form-group">
+		<label for="password">{{labelPassword}}</label>
+		
+			<input type="password" id="password" name="password" class="form-control" />
+			<span class="help-inline error">{{passwordError}}</span>
+		
+	</div>
+	<div class="form-group">
+		<label for="password">{{labelPasswordConfirm}}</label>
+		
+			<input type="password" id="password_confirm" name="password_confirm" class="form-control" />
+			<span class="help-inline error">{{passwordConfirmError}}</span>
+		
+	</div>
+	
+	<div class="form-group">
+		<input type="hidden" name="token" value="send" />
+		<input type="hidden" id="id_listing" name="id_listing" value="{{id}}" class="form-control" >
+		<button class="btn btn-primary" type="submit">{{button}}</button>
+	</div>
+	
+{{/ results}}
+</form>
+</div>

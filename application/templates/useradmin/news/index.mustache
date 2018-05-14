@@ -1,0 +1,42 @@
+<div id="result" >
+
+<table class="">
+	<caption>Table of images</caption>
+	<col span="1" width="20">
+	<col span="1" width="200">
+	<col span="1" width="200">
+	<col span="1" width="100">
+	<col span="1" width="220">
+	<col span="1" width="20">
+    <thead>
+    <tr class="center">
+		<th>#</th>
+		<th>caption</th>   
+		<th>date</th>   
+		<th>size</th>   
+		<th>thumbnail</th>
+		<th>delete</th>
+    </tr>
+    </thead>
+    <tbody>
+{{# images}}
+    <tr class="center">
+		<td></td>
+		<td>{{caption}}</td>	
+		<td>{{uploadDate}}</td>	
+		<td>{{contentSize}}</td>	
+		<td>
+		<img src="{{thumbnailUrl}}" width="200"alt={{caption}} />
+		</td>
+		<td>
+		<a href="{{urlDelete}}{{id}}">delete</a>
+		</td>
+    </tr>
+{{/ images}}
+    </tbody>	
+</table>
+
+
+
+
+</div>

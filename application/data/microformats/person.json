@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "type": [
+        "h-card"
+      ],
+      "properties": {
+        "name": [
+          "Joe Bloggs"
+        ],
+        "url": [
+          "http://example.com"
+        ]
+      }
+    }
+  ]
+}

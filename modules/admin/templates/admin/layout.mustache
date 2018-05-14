@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+<meta charset="utf-8">
+<title>{{title}}</title>
+<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+<meta name="author" content="Kemal Delalic &lt;kemal.delalic@gmail.com&gt; 2012." />
+{{#css}}
+<link rel="stylesheet" href="{{href}}" type="text/css" media="{{media}}" />{{/css}}
+{{#head_js}}
+<script type="text/javascript" src="{{src}}"></script>{{/head_js}}
+<style type="text/css">
+body {
+	padding-top: 60px;
+}
+</style>
+</head>
+<body>
+<div class="topbar">
+	<div class="topbar-inner">
+		<div class="container">
+			{{#home_link}}
+			<a href="{{url}}" class="brand">{{text}}</a>
+			{{/home_link}}
+			
+			{{{header_links}}}
+			
+			{{#logout_links}}
+			<ul class="nav secondary-nav">
+				<li class="dropdown" data-dropdown="dropdown">
+					<a class="dropdown-toggle" href="{{logout}}">Log out</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="{{logout}}">Just .. log out</a>
+						</li>
+						<li class="divider"></li>
+						<li>
+							<a href="{{logout_destroy}}">Log out &amp; destroy</a>
+						</li>
+						<li>
+							<a href="{{logout_all}}">Log out all sessions</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			{{/logout_links}}
+		</div>
+	</div>
+</div>
+<div class="container">
+	
+	{{{breadcrumb}}}
+
+	{{>content}}
+	
+</div>
+<footer>
+	<p class="container">
+		<span class="pull-left">Admin panel for Kohana created by <a href="http://kloopko.com/">Kloopko</a>.</span>
+		
+		<span class="pull-right">Powered by <a href="http://twitter.github.com/bootstrap/">Bootstrap</a>, from Twitter.</span>
+	</p>
+</footer>
+<script type="text/javascript">
+$('.alert-message .close').click(function(e){
+	e.preventDefault();
+	
+	$(this).parent().slideUp();
+});
+</script>
+</body>
+</html>

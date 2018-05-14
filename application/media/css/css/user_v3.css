@@ -1,0 +1,157 @@
+/*--- NAV ---*/
+
+.panel {
+    padding: 20px 5px 0 5px;
+}
+.panel div {
+    margin: 2px auto 10px;
+    color: darkblue;
+}  
+
+
+.menu-items {
+    display: none;
+    margin:0;
+    padding: 0;
+    cursor: pointer;
+}
+.menu-title {
+    font-weight: bold;
+    cursor:pointer;
+    padding-left: 18px;
+}
+.menu-open .menu-items {
+    display: block;
+} 
+.menu-open .menu-title {
+    background: url(csg-50.png) no-repeat;
+    background-position: 0 -128px; width: 16px; height: 16px; 
+}
+.menu-close .menu-title {
+    background: url(csg-50.png) no-repeat;
+    background-position: 0 -96px; width: 16px; height: 16px;
+}
+
+/*--- BUTTON SUBMIT --*/
+button{
+    display: block;
+    border:0;
+    background:none;
+    overflow:visible;
+    margin:20px auto 0 76px;
+    padding:0;
+    outline:none;
+}
+button:hover{
+    cursor: pointer;
+}
+
+button span{
+    display:inline-block;
+    height:26px;
+    background:url(../css/i/button.gif) no-repeat;
+    line-height:26px;
+    text-transform:uppercase;
+    color:#808080;
+    font-family:arial, helvetica, sans-serif;
+    font-size:12px;
+}
+button span span{
+    position:relative;
+    left:10px;
+    padding:0 10px 0 0;
+    background-position:100% 0;
+}
+button:hover span{
+    background-position:0 -26px;
+    color:#fff;
+}
+button:hover span span{
+    background-position:100% -26px;
+}
+/*---    ----*/
+
+/*
+dataInput input {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 1px 0 1px 3px;
+    width: 100%;
+    border: 1px solid blue;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    font-size: 16px;
+    outline: none;
+}
+*/
+
+/* ----- CONTENT --------*/ 
+#result {
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+#result table {
+/*    border: 2px solid #5970B2;*/
+    border: 0;
+    border-collapse: collapse;
+    margin: 10px;
+    padding: 3px;
+    color: #79868c;
+    background: #1BA5E0;
+}
+#result td,th {
+    padding: 5px;
+/*    border: 1px solid gray;*/
+    border: 0;
+}
+#result th{
+    text-align: right;
+    color: #FFF;
+}
+#result td {
+    font-style: italic;
+    font-weight: 600;
+    background: lightblue;
+}
+
+#result td input[type="text"] {
+    width: 15em;
+    font-style: italic;
+    font-weight: 600;
+    color: blue;
+    background: #fff;    
+}
+#result td input {
+    color: blue;
+}
+
+#result .error {
+    color: red;
+}
+/*
+#result .tableHead {
+    margin-left: 10px;
+    margin-top: 10px;
+    color: darkblue;
+}
+
+#result .tableHead .source {
+    font-weight: bold;
+}    
+*/
+#login{
+    position: relative;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+
+}
+
+#login div{
+
+}
+
+
+

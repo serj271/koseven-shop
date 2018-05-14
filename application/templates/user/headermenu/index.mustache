@@ -1,0 +1,18 @@
+<ul id="menu">
+    <li><a href="{{personalHref}}"><span>{{personalHead}}</span></a></li>
+
+    <li><a href="{{usersHref}}"><span>{{usersHead}}</span></a></li>			
+
+    {{# isAuth}}    
+    <li><a href="{{logoutHref}}"><span>{{logoutHead}}</span></a></li>						
+    <li><a href="/personal/news"><span>news</span></a></li>
+    {{/ isAuth}}		    
+
+    {{^isAuth}}
+    <li><a href="{{loginHref}}"><span>{{loginHead}}</span></a></li>    
+    <li><a href="{{registrationHref}}"><span>{{registrationHead}}</span></a></li>									
+    {{/isAuth}}
+			
+			
+</ul>
+

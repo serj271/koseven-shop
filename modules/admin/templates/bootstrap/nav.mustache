@@ -1,0 +1,25 @@
+<ul class="nav">
+	{{#links}}
+		{{^submenu}}
+		<li class="{{#selected}}selected{{/selected}}">
+			<a href="{{url}}">{{text}}</a>
+		</li>
+		{{/submenu}}
+		{{#submenu}}
+		<li>
+			<ul class="nav secondary-nav">
+				<li class="dropdown" data-dropdown="dropdown">
+					<a class="dropdown-toggle" href="#">{{title}}</a>
+					<ul class="dropdown-menu">
+						{{#links}}
+						<li>
+							<a href="{{url}}">{{text}}</a>
+						</li>
+						{{/links}}
+					</ul>
+				</li>
+			</ul>
+		</li>
+		{{/submenu}}
+	{{/links}}
+</ul>

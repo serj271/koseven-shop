@@ -1,0 +1,66 @@
+<div class="page-header">
+	<h1>{{headline}}</h1>
+</div>
+
+{{#create_button}}
+<div class="well">
+	<a class="btn primary large" href="{{url}}">{{text}}</a>
+</div>
+{{/create_button}}
+
+{{#result}}
+<form accept-charset="{{charset}}" action="{{#deletemultiple}}{{url}}{{/deletemultiple}}" id="deletemultiple_form" method="GET">
+	<table class="zebra-striped">
+		<thead>
+			<tr>
+				<th>
+					<input type="checkbox" id="select_all" value="" />
+				</th>
+				{{#columns}}
+				<th>{{name}}</th>
+				{{/columns}}
+			</tr>
+		</thead>
+		<tbody>	
+			{{#rows}}
+			<tr>
+				<td>
+					<input class="single" type="checkbox" name="ids[]" value="{{#item}}{{id}}{{/item}}" />
+				</td>
+				{{#values}}
+				<td>{{value}}</td>
+				{{/values}}
+				<td>
+				{{#options}}
+					<a class="{{class}}" href="{{url}}">{{text}}</a>
+				{{/options}}
+				</td>
+			</tr>
+			{{/rows}}
+		</tbody>
+	</table>
+	<div class="clearfix">
+		{{#deletemultiple}}
+		<button class="btn large error" id="confirm_delete_multiple" value="yes" type="submit">{{text}}</button>
+		{{/deletemultiple}}
+	</div>
+</form>
+{{/result}}
+
+{{{pagination}}}
+
+<script>
+$(function(){
+	$('input#select_all').click(function(e){
+		
+		var cbs = '#deletemultiple_form input.single';
+		
+		if ($(this).is(':checked')) {
+			$(cbs).attr('checked',true);
+		}
+		else {
+			$(cbs).removeAttr('checked');
+		}
+	});
+});
+</script>

@@ -1,0 +1,51 @@
+*html #main{
+    height:100%;
+
+}
+*html #footer .border{
+    background-image:none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(
+        src = 'i/star_70.png',
+        sizingMethod = 'crop'
+    );
+}
+*html #all{
+    width:100%;
+    
+}
+#menu a{
+    cursor:pointer;
+}
+.custom-select {
+    zoom: 1;
+}
+
+div#left div.content{
+    zoom: 1!impotant;
+}
+
+div#left div.panel{
+    zoom:1;
+}
+
+div#left div.panel input[type="text"]{
+    margin-left: 8px;
+    height: 20px;
+}
+div#left div.panel select{
+    margin-top: 0;
+}
+
+div#left div.controls{
+    zoom: 1;
+}
+
+div#result {
+    zoom:1;
+}
+div.custom-select {
+    padding-right: 10px;
+}
+div.custom-select-title {
+    min-width: 100%;    
+}

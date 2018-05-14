@@ -1,0 +1,36 @@
+{
+	"name": "samwilson/kohana_datalog",
+	"type": "kohana-module",
+	"description": "A Kohana module for tracking changes to ORM entities.",
+	"license": "GPL-3.0+",
+	"keywords": ["kohana", "orm", "logging", "auditing"],
+	"support": {
+		"issues": "https://github.com/samwilson/kohana_datalog/issues",
+		"source": "https://github.com/samwilson/kohana_datalog"
+	},
+	"authors": [
+		{
+			"name": "Sam Wilson",
+			"email": "sam@samwilson.id.au",
+			"homepage": "http://samwilson.id.au/",
+			"role": "developer"
+		},
+		{
+			"name": "JustLikeIcarus",
+			"email": "JustLikeIcarus@gmail.com",
+			"role": "developer"
+		},
+		{
+			"name": "Kerstens Maxim",
+			"email": "maxim.kerstens@gmail.com",
+			"role": "developer"
+		}
+	],
+	"require": {
+		"kohana/auth": ">=3.3",
+		"kohana/orm": ">=3.3",
+		"kohana/core": ">=3.3",
+		"composer/installers": "~1.0",
+		"php": ">=5.3.3"
+	}
+}

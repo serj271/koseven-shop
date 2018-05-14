@@ -1,0 +1,42 @@
+{
+  "items": [
+    {
+      "type": [
+        "h-product"
+      ],
+      "properties": {
+        "name": [
+          "Microformats For Dummies"
+        ],
+        "photo": [
+          "http://example.org/mfd.png"
+        ],
+        "description": [
+          {
+            "value": "Want to get started using microformats, but intimidated by hyphens and mediawiki? This book contains everything you need to know!",
+            "html": "<p>Want to get started using microformats, but intimidated by hyphens and mediawiki? This book contains everything you need to know!</p>"
+          }
+        ],
+        "price": [
+          "20.00"
+        ],
+        "brand": [
+          {
+            "value": "ACME Publishing inc.",
+            "type": [
+              "h-card"
+            ],
+            "properties": {
+              "name": [
+                "ACME Publishing inc."
+              ],
+              "url": [
+                "http://example.com/acme"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

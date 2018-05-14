@@ -1,0 +1,12 @@
+<?php
+
+class Controller_Welcome extends Controller {
+
+	public function action_index()
+	{
+//		$this->response->body('hello, world!');
+		$view = View::factory('welcome');
+		$this->response->body($view);		
+	}
+
+} // End Welcome

@@ -1,0 +1,76 @@
+<div id="result" class="">
+
+{{#in_ca}}
+<table class="table-bordered">
+	<caption class="caption"><span class="text-info"> {{caption}} </span></caption>
+	<colgroup>
+	<col span="1" width="200">
+	<col span="3" width="50">
+	<col span="1" width="300">
+	</colgroup>
+	{{#result}}
+	<thead>
+		{{#labels}}
+		<tr>
+			<th>{{name}}</th>
+			<th>{{price}}</th>
+			<th>{{quantity}}</th>
+			<th>{{subtotal}}</th>
+			<th>options</th>
+		</tr>
+		{{/labels}}
+	</thead>
+	
+	<tbody>
+		
+			{{#rows}}
+			<tr>
+				<td class="text-center">
+				{{#item}}				
+					<a href="{{uri}}">{{name}}</a>				
+				{{/item}}
+				</td>
+				{{#item}}
+					<td class="text-center">{{price}}
+					</td>				
+				{{/item}}
+				{{#item}}
+					<td class="text-center">{{quantity}}
+					</td>				
+				{{/item}}
+				{{#item}}
+					<td class="text-center">{{subtotal}}
+					</td>				
+				{{/item}}
+				{{#item}}
+					<td>
+					{{#options}}
+						<a class="{{class}}" href="{{url}}" >{{text}}</a>
+					{{/options}}
+					</td>				
+				{{/item}}
+			</tr>		
+			{{/rows}}
+			<tr>
+				{{#labels}}
+				<td colspan="4" class="text-center">{{total_amount}}</td>
+				{{/labels}}
+				<td class="text-center">{{total_amount}}</td>
+			</tr>
+		
+	</tbody>
+	{{/result}}
+</table>
+
+{{/in_ca}}
+{{^in_ca}}
+    <div class="caption">
+    {{message_empty_shopping_cart}}
+    </div>
+{{/in_ca}}
+{{#to_product}}
+<div class="well">
+	<a class="btn primary large" href="{{url}}">{{text}}</a>
+</div>
+{{/to_product}}
+</div>

@@ -1,0 +1,78 @@
+<div class="page-header">
+	<h2>Please, log in</h2>
+</div>
+
+<form action="" accept-charset="{{charset}}" method="POST" role="form" id="login" class="form">
+
+	<div class="control-group">
+		<label for="username" class="control-label">{{labelUsername}}</label>
+		<div class="controls">
+			<input type="text" id="username" name="username" value="{{#values}}{{username}}{{/values}}" class="form-control"/>
+			{{#errors}}
+			<span class="text-error">{{username}}</span>
+			{{/errors}}
+		</div>
+	</div>
+	<div class="control-group">
+		<label for="email" class="control-label">{{labelEmail}}</label>
+		<div class="controls">
+			<input type="text" id="email" name="email" value="{{#values}}{{email}}{{/values}}" class="form-control"/>
+			{{#errors}}
+			<span class="text-error">{{email}}</span>
+			{{/errors}}
+		</div>
+	</div>
+
+	<div class="control-group">
+		<label for="password" class="control-label">{{labelPassword}}</label>
+		<div class="input">
+			<input type="password" id="password" name="password" class="form-control"/>
+			{{#errors}}
+			<span class="text-error">{{password}}</span>
+			{{/errors}}
+		</div>		
+	</div>
+	<div class="control-group">
+		<label for="password" class="control-label">{{labelConfirm}}</label>
+		<div class="input">
+			<input id="password_confirm" type="password" name="_external[password_confirm]" value="" />
+			{{#errors}}
+			<span class="text-error">{{passwordConfirm}}</span>
+			{{/errors}}
+		</div>		
+	</div>
+	<div class="control-group">
+		<label for="captcha" class="control-label">{{labelCaptcha}}</label>
+		<div class="input">
+			<input id="captcha" type="text" name="captcha" value="" />
+			{{#errors}}
+			<span class="text-error">{{captchaError}}</span>
+			{{/errors}}
+		</div>		
+	</div>
+
+	<div class="control-group">
+		<label for="remember" class="control-label">Remember me</label>
+		<div class="input">
+			<ul class="inputs-list">
+				<li>
+		<input type="checkbox" id="remember" name="remember" value="1" {{#values}}{{#remember}}checked{{/remember}}{{/values}} />
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="control-group"">
+		<input type="hidden" name="token" value="{{#values}}{{token}}{{/values}}" />
+		<button type="submit" class="btn btn-default">{{labelSubmit}}</button>
+		
+	</div>
+	
+
+</form>
+
+<p>
+	{{#captcha}}
+	
+	{{/captcha}}
+</p>
+	

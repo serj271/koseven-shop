@@ -1,0 +1,39 @@
+{
+  "items": [
+    {
+      "type": [
+        "h-resume"
+      ],
+      "properties": {
+        "name": [
+          "Joe Bloggs resume"
+        ],
+        "contact": [
+          {
+            "value": "Joe Bloggs",
+            "type": [
+              "h-card"
+            ],
+            "properties": {
+              "name": [
+                "Joe Bloggs"
+              ],
+              "photo": [
+                "http://example.org/photo.png"
+              ],
+              "url": [
+                "http://example.org"
+              ]
+            }
+          }
+        ],
+        "summary": [
+          "Joe is a top-notch llama farmer with a degree in Llama husbandry and a thirst to produce the finest wool known to man"
+        ],
+        "skill": [
+          "Llama husbandry"
+        ]
+      }
+    }
+  ]
+}
