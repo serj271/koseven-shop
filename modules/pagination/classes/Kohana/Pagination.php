@@ -227,11 +227,11 @@ class Kohana_Pagination {
 		{
 			case 'query_string':
 				return URL::site($this->_route->uri($this->_route_params).
-					$this->query([$this->config['current_page']['key'] => $page]));
+					$this->query([$this->config['current_page']['key'] => $page]),$protocol=NULL, $index=FALSE);
 
 			case 'route':
 				return URL::site($this->_route->uri(array_merge($this->_route_params,
-					[$this->config['current_page']['key'] => $page])).$this->query());
+					[$this->config['current_page']['key'] => $page])).$this->query(),$protocol=NULL, $index=FALSE);
 		}
 
 		return '#';

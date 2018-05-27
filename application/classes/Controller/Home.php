@@ -1,12 +1,12 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 class Controller_Home extends Controller_Common_Home {
-//    public $template ='main';
+//    public $template ='template';
 	protected $config = 'example';
 	
-	public function before()
-	{
-		parent::before();
+//	public function before()
+//	{
+//		parent::before();
 /*		$session = Session::instance('native');
 		Cart::SetCartId();//		
 		$this->_mCartId = $session->get('mCartId', false);
@@ -27,7 +27,7 @@ class Controller_Home extends Controller_Common_Home {
 			}
 		}
 */
-	}
+//	}
 		
 	
     public function action_index(){
@@ -58,13 +58,13 @@ class Controller_Home extends Controller_Common_Home {
 //		$this->menu = Menu::factory($this->config);
 		$this->menu = '';		
 		
-		$this->template->content = '';		
-		$this->template->breadcrumbs = '';
+//		$this->template->content = '';		
+//		$this->template->breadcrumbs = '';
         
-        $navigator=View::factory('/home/navigator')
-    	    ->set('message',$message);
+//        $navigator=View::factory('/home/navigator')
+//    	    ->set('message',$message);
 
-        $this->template->navigator=$navigator;
+ //       $this->template->navigator=$navigator;
 //		$cart_quantity = NULL;
 //		$cart_quantity = View::factory('/basket/navbar')->bind('quantity',$quantity);
 //		$this->template->cart = $basket;
@@ -97,13 +97,13 @@ class Controller_Home extends Controller_Common_Home {
 
 //		$this->template->content = $jade->render();		
 
-		$this->template->content =$content;
+		/* $this->template->content =$content;
 
 		$login = FALSE;
 		if (Auth::instance()->logged_in('login'))
 		{
 		    $login = TRUE;
-		}
+		} */
 
 		/* $quantity = Helpers_Cart::getQuantity($this->_mCartId);
 		$total_amount = Helpers_Cart::getTotal($this->_mCartId);
@@ -113,7 +113,7 @@ class Controller_Home extends Controller_Common_Home {
 			->bind('login', $login);
 		$this->template->fixedTop = $fixedTop; */
 		
-		$lang = Lang::instance()->get();
+		/* $lang = Lang::instance()->get();
 		$lang_title='';
 		$lang_url='';
 		if($lang == 'en-us'){
@@ -154,7 +154,7 @@ class Controller_Home extends Controller_Common_Home {
 		); 
 		$navbar = View::factory('navbar/home')
 			->bind('navbar_items',$navbar_items);
-		$this->template->navbar = $navbar;
+		$this->template->navbar = $navbar; */
 	
 		    
     }

@@ -8,7 +8,7 @@ class Controller_Media extends Controller {
 	{
 		parent::before();
 		$this->config = Kohana::$config->load('media');
-		Log::instance()->add(Log::NOTICE, 'ok');
+//		Log::instance()->add(Log::NOTICE, 'media ok');
 	}
 
 	public function index(){

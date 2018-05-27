@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-abstract class Controller_Common_Admin extends Controller_Common {
+abstract class Controller_Common_Adminmodel extends Controller_Common {
     public $template='admin';
     public $ajaxAllow =true;
 

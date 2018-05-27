@@ -81,7 +81,8 @@ abstract class Controller_Product extends Controller_Common_Product {
 		$renderer = Kostache::factory(); 
 //		$this->view = $renderer->render($view);		
 		$this->template->content=$renderer->render($this->view);
-		$this->template->breadcrumbs = '';	
+
+		$this->template->breadcrumbs = '';
 
 		$login = FALSE;
 		if (Auth::instance()->logged_in('login'))

@@ -1,7 +1,7 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
 abstract class Controller_Common extends Controller_Template {
-//    public $template='main';
+    public $template='main';
     public $ajaxAllow =true;
 
     public function before(){

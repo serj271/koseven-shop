@@ -20,7 +20,7 @@ abstract class Controller_Admin extends Controller_Common_Admin {
 			->headers('x-frame-options','SAMEORIGIN')
 			->headers('x-xss-protection','1; mode=block');			
 		// Check if user is allowed to continue
-		static::check_permissions($this->request);
+//		static::check_permissions($this->request);
 		
 		// Automatically figure out the ViewModel for the current action 
 		if ($this->auto_view === TRUE)
@@ -48,7 +48,8 @@ abstract class Controller_Admin extends Controller_Common_Admin {
 		if ($this->view_navigator)
 		{
 			$this->view_navigator->action 	= $this->request->action();			
-			$this->view_navigator->controller = $this->request->controller();		
+			$this->view_navigator->controller = $this->request->controller();
+			$this->view_navigator->directory 	= $this->request->directory();			
 			$this->view_navigator->action 	= $this->request->directory();		
 			$this->view_navigator->model 		= $this->_model;
 		}
@@ -56,8 +57,7 @@ abstract class Controller_Admin extends Controller_Common_Admin {
 	}
 	
 	public function after()
-	{
-		
+	{		
 		if ($this->view !== NULL)
 		{
 			// Render the content only in case of AJAX and subrequests
@@ -122,41 +122,48 @@ abstract class Controller_Admin extends Controller_Common_Admin {
 	 */
 	public static function find_view(Request $request)
 	{
-		// Empty array for view name chunks
-		$view_name = array('View');
-		
+		$view_name = array('View');		
 		// If current request's route is set to a directory, prepend to view name
-		$request->directory() and array_push($view_name, $request->directory());
-		
+		if ($request->directory())
+		{
+			array_push($view_name, $request->directory());
+		}
+		if ($request->controller())
+		{
+			array_push($view_name, $request->controller());
+		}	
 		// Append controller and action name to the view name array
-		array_push($view_name, $request->controller(), $request->action());
-		
+		$view_name[] = ucfirst($request->action());		
 		// Merge all parts together to get the class name
-		$view_name = implode('_', $view_name);
-		
+		$view_name = implode('_', $view_name);		
 		// Get the path respecting the class naming convention
-		$view_path = strtolower(str_replace('_', '/', $view_name));
+		$view_path = str_replace('_', DIRECTORY_SEPARATOR, $view_name);
 		
 		return array($view_name, $view_path);
 	}
 	public static function find_view_navigator(Request $request)
 	{
 		// Empty array for view name chunks
+//		Log::instance()->add(Log::NOTICE, Debug::vars($request->pole));
 		$view_name = array('View');		
 		// If current request's route is set to a directory, prepend to view name
-
-		$request->directory() and array_push($view_name, $request->directory(), $request->controller());
-		
+		if ($request->directory())
+		{
+			array_push($view_name, $request->directory());
+		}
+		if ($request->controller())
+		{
+			array_push($view_name, $request->controller());
+		}	
 		// Append controller and action name to the view name array
-		array_push($view_name, 'Navigator');
-		
+//		$view_name[] = ucfirst($request->action());	
+		array_push($view_name, ucfirst('navigator'));
 		// Merge all parts together to get the class name
-		$view_name = implode('_', $view_name);
-		
+		$view_name = implode('_', $view_name);		
 		// Get the path respecting the class naming convention
-		$view_path = strtolower(str_replace('_', '/', $view_name));
+		$view_path = str_replace('_', DIRECTORY_SEPARATOR, $view_name);
+		
 		return array($view_name, $view_path);
-	}
-
+	} 
 
 }

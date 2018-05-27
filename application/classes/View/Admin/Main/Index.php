@@ -5,6 +5,10 @@ class View_Admin_Main_Index {
 
 	public function model()
 	{
+		
+		$model = ORM::factory($this->model)
+			->find();
+//		Log::instance()->add(Log::NOTICE, Debug::vars($model->as_array()));
 		return Inflector::humanize($this->model);
 	}	
 
@@ -12,7 +16,7 @@ class View_Admin_Main_Index {
 
 
     public function message(){
-	return 'Hello admin22';	
+		return 'Hello admin22 - ';	
 
     }   
 

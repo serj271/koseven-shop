@@ -109,6 +109,10 @@ if (isset($_SERVER['KOHANA_ENV']))
  */
 Kohana::init([
 	'base_url'   => '/koseven-shop/',
+	'index_file'	=> FALSE,
+	'errors' => FALSE,
+//	'expose'
+//	'cache_life'=>
 ]);
 
 /**
@@ -129,7 +133,6 @@ Kohana::modules([
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 	 'encrypt'    => MODPATH.'encrypt',    // Encryption supprt
 	 'auth'       => MODPATH.'auth',       // Basic authentication
-//	 'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 	 'database'   => MODPATH.'database',   // Database access
 	 'image'      => MODPATH.'image',      // Image manipulation
@@ -143,7 +146,7 @@ Kohana::modules([
 	'csv'		=>MODPATH.'CSV-master',
 //	'menu'        	=> MODPATH.'menu', 
 //	'captcha'        	=> MODPATH.'captcha',  	
-//	'ecommerce'	=> MODPATH.'oz-ecommerce',        // Object Relationship Mapping
+	'ecommerce'	=> MODPATH.'oz-ecommerce',        // Object Relationship Mapping
 	'pagination'	=>MODPATH.'pagination',
 	'breadcrumbs'=> MODPATH.'breadcrumbs',
 	'message'=> MODPATH.'message',
@@ -153,6 +156,7 @@ Kohana::modules([
 	'media'		=> MODPATH.'media',
 	'upload'	=> MODPATH.'kohana-upload-storage-master',   // Upload access
 	'catalog-shop'=> MODPATH.'catalog-shop',
+//	'admin'=>MODPATH.'admin',
 	]);
 
 /**
@@ -182,7 +186,7 @@ Cookie::$salt= 'mysaltqweretsllslsldlksasa4345sa5d54a@@';
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
-
+ini_set('display_errors', TRUE);
 
 Route::set('home', '(/<action>/(<pole>(/<id>(/<overflow>))))')
 	->defaults(array(
@@ -198,7 +202,7 @@ Route::set('home', '(/<action>/(<pole>(/<id>(/<overflow>))))')
 		'action'     => 'index',
 		'index_file' =>''
 	)); */
-Route::set('Product', 'product(/<action>)(/<item_uri>)',array(
+Route::set('Product', 'product(/<item_uri>)',array(
 	'item_uri'=>'.*'
 	))	
 	->defaults(
@@ -211,7 +215,7 @@ Route::set('Product', 'product(/<action>)(/<item_uri>)',array(
 	->filter(
 		function(Route $route, $params, Request $request) 			
 		{
-//				Log::instance()->add(Log::NOTICE, Debug::vars('route++',$route, $params));
+//			Log::instance()->add(Log::NOTICE, Debug::vars('route++',$route, $params));
 			$count = 1;
 			$uri = $request::detect_uri();
 //			$uri = str_replace('product','', $uri);
@@ -219,20 +223,21 @@ Route::set('Product', 'product(/<action>)(/<item_uri>)',array(
 			$asParts = @ explode('/',$uri);
 //			$directory = @ $asParts[0];
 //			$controller = @ $asParts[1];
-			$action = @ $asParts[1];
-			$item_uri = @ $asParts[2];
+//			$action = @ $asParts[1];
+			$item_uri = @ $asParts[1];
 	
-			if($uri == ''){					
+			if($item_uri == ''){
+//				Log::instance()->add(Log::NOTICE, Debug::vars('uri',$uri));				
 				return TRUE;
 			}
 			
-			if(!$action){
+			/* if(!$action){
 				$action = 'index';
-			}
+			} */
 			$params['directory'] =	'Product';		
 		/* 	$params['controller'] = ucfirst($controller); */
-			$params['controller'] = 'Main';
-			$params['action'] = 'index';
+			$params['controller'] = 'Main';		
+			$params['action'] = 'read';					
 			$params['item_uri'] = $item_uri;
 //		Log::instance()->add(Log::NOTICE, Debug::vars($params,$uri));
 			return $params;			
@@ -279,20 +284,53 @@ Route::set('useradmin', 'useradmin(/<controller>(/<action>(/<id>)))',array('id'=
 	
 //	Log::instance()->add(Log::NOTICE, Debug::vars(Request::current()->headers));
 	
-/* 
-Route::set('adminmodel', 'admin(/<controller>(/<action>(/<id>)))',array('id'=>'[0-9]+'))
+
+Route::set('Admin', 'admin(/<controller>(/<action>(/<id>)))',array('id'=>'[0-9]+'))
 	->defaults(array(
-		'directory' =>'admin',
-		'controller' => 'index',
+		'directory' =>'Admin',
+		'controller' => 'Main',
 		'action'     => 'index',
-	)); */
+	));
+ 
+Route::set('Adminmodel', 'adminmodel(/<model>(/<action>(/<id>)))',array('id'=>'[0-9]+'))
+	->defaults(array(
+		'directory' =>'Adminmodel',
+		'controller' => 'Main',
+		'action'     => 'index',
+	))
+	->filter(
+		function(Route $route, $params, Request $request) 			
+		{
+//			Log::instance()->add(Log::NOTICE, Debug::vars('route++',$route, $params));
+		
+			$uri = $request::detect_uri();
+			$uri = rtrim($uri, '/');
+			$asParts = @ explode('/',$uri);
+			$prefix = @ $asParts[0];//adminmodel
+			$model = @ $asParts[1];
+			$action = @ $asParts[2];
+			$id = @ $asParts[3];
 	
+			$models = Kohana::$config->load('adminmodel.models');
+			if($model && !in_array($model, array_keys($models))){
+				return FALSE;
+			}
+			
+			$params['directory'] =	'Adminmodel';		
+			$params['controller'] = 'Main';		
+			$params['action'] = 'index';					
+//			$params['item_uri'] = $item_uri;
+		Log::instance()->add(Log::NOTICE, Debug::vars($params,$uri,$model,array_keys($models)));
+			return $params;			
+		}
+	); 
 Route::set('basket', 'basket(/<action>(/<id>))',array('id'=>'[0-9]+'))
 	->defaults(array(
 		'directory' =>'basket',
 		'controller' => 'main',
 		'action'     => 'index',
 	));
+/*
 Route::set('admin/basket', 'admin/basket(/<action>(/<id>))',array('id'=>'[0-9]+'))
 	->defaults(array(
 		'directory' =>'admin',
@@ -304,7 +342,7 @@ Route::set('admin/product', 'admin/product(/<action>(/<id>))',array('id'=>'[0-9]
 		'directory' =>'admin',
 		'controller' => 'product',
 		'action'     => 'index',
-	));	
+	));	 */
 	
 /*
 Route::set('blog/stats', 'blog/stats/<action>(/<limit>)', array(
@@ -314,7 +352,7 @@ Route::set('blog/stats', 'blog/stats/<action>(/<limit>)', array(
 		'controller' => 'stats',
 	));
 */
- 
+ /* 
 Route::set('comments', 'comments/<action>(/<id>(/<page>))(<format>)', array(
 		'id'     => '\d+',
 		'page'   => '\d+',
@@ -331,7 +369,7 @@ Route::set('comment', 'comment(/<controller>(/<action>(/<id>)))',array('id'=>'[0
 		'directory' =>'comment',
 		'controller' => 'main',
 		'action'     => 'index',
-	));
+	)); */
 	
  Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults([

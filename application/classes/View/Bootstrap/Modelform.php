@@ -4,7 +4,8 @@
  * 
  * @author	Kemal Delalic	<kemal.delalic@gmail.com>
  */
-class View_Bootstrap_ModelForm extends View_Bootstrap_Form {
+class View_Bootstrap_Modelform extends View_Bootstrap_Form {
+
 	/**
 	 * @var	ORM 	Current model object
 	 */
@@ -13,18 +14,13 @@ class View_Bootstrap_ModelForm extends View_Bootstrap_Form {
 	/**
 	 * @var	array	Columns to use as name for remote relations
 	 */
-	protected $_name_columns = array();
+	protected $_name_columns = array('name','title','username','email');
 
 	/**
 	 * @var	string	Model fields are currently loaded for (object_name)
 	 */
 	protected $_loaded_model;
 
-	protected $_includables = array();
-
-	public function includables( $includables){
-	    $this->_includables = $includables;
-	}
 	/**
 	 * Loads a model into the current form object
 	 * Fields will be loaded only the first time
@@ -72,6 +68,7 @@ class View_Bootstrap_ModelForm extends View_Bootstrap_Form {
 		
 		if (count($belongs_to) > 0)
 		{
+//			
 			$belongs_to	= array_combine(Arr::pluck($belongs_to, 'foreign_key'), $belongs_to);
 		}
 		
@@ -98,11 +95,6 @@ class View_Bootstrap_ModelForm extends View_Bootstrap_Form {
 		{
 			unset($columns[$updated['column']]);
 		}
-		foreach ($this->_includables as $includable){
-		    if(isset($columns[$includable])){
-			unset($columns[$includable]);
-		    }
-		}
 		
 		foreach ($columns as $name => $column)
 		{
@@ -122,11 +114,10 @@ class View_Bootstrap_ModelForm extends View_Bootstrap_Form {
 			if (isset($belongs_to[$name]))
 			{
 				$remote_model = ORM::factory($belongs_to[$name]['model']);
-				
 				$options = $remote_model
 					->find_all()
 					->as_array($model->primary_key(), $this->_find_name_column($remote_model));
-					
+				
 				$field->type('select')
 					->options($options);
 			}
@@ -148,8 +139,10 @@ class View_Bootstrap_ModelForm extends View_Bootstrap_Form {
 				{
 					default:
 						
-						$field->type('text');
-					
+					/* 	$field->type('text'); */
+						$field->type('text')
+							->attr('class','span8')
+							->attr('autocomplete',$name);
 					break;
 					case 'enum' :
 					
@@ -162,16 +155,23 @@ class View_Bootstrap_ModelForm extends View_Bootstrap_Form {
 					case 'int' :
 					
 						$field->type('text')
-							->attr('class','span4');
+							->attr('class','span4')
+							->attr('autocomplete',$name);
 					
 					break;
 					case 'varchar' :
 					
 						$field->type('text')
-							->attr('class','span8');
+							->attr('class','span8')
+							->attr('autocomplete',$name);
 					
 					break;
 					case 'text' :
+						$field->type('text')
+							->attr('class','span8')
+							->attr('autocomplete',$name);
+						
+					break;
 					case 'tinytext' :
 						
 						$field->type('textarea')

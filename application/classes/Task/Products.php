@@ -33,14 +33,15 @@ class Task_Products extends Minion_Task {
 			$this->clear_model($modal);
 		}			
 			
-		/* $this->clear_model();
-		$this->clear_model('Catalog_Category'); */
+		$this->clear_model();
+		$this->clear_model('Catalog_Category');
 			
 		$this->create_product(
 			$name='name product'.$this->product_id,
 			$description='description product'.$this->product_id,
 			$uri='uri_product_'.$this->product_id,
-			$product_id = $this->product_id
+			$product_id = $this->product_id,
+			$photo_id = $this->product_id
 		);
 	
 		$this->create_catalog_category(
@@ -68,7 +69,8 @@ class Task_Products extends Minion_Task {
 			$name='name product'.$this->product_id,
 			$description='description product'.$this->product_id,
 			$uri='uri_product_'.$this->product_id,
-			$product_id = $this->product_id
+			$product_id = $this->product_id,
+			$photo_id = $this->product_id
 		);
 		$this->add_category(2, $this->catalog_id);//product_id catalog_category_id
 		

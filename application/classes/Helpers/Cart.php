@@ -4,7 +4,7 @@ class Helpers_Cart {
 		
 		if($mCartId){
 			$carts = Cart::GetProducts($mCartId);
-			Log::instance()->add(Log::NOTICE, Debug::vars($carts));
+//			Log::instance()->add(Log::NOTICE, Debug::vars($carts));
 //			$carts = $results->as_array();
 			$quantity=0;
 			if(count($carts)){

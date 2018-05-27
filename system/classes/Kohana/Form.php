@@ -34,10 +34,12 @@ class Kohana_Form {
 	 */
 	public static function open($action = NULL, array $attributes = NULL)
 	{
+//Log::instance()->add(Log::NOTICE, Debug::vars($action,$attributes));
 		if ($action instanceof Request)
 		{
 			// Use the current URI
 			$action = $action->uri();
+//Log::instance()->add(Log::NOTICE, Debug::vars($action,$attributes));
 		}
 
 		if ( ! $action)
@@ -62,7 +64,7 @@ class Kohana_Form {
 			// Use POST method
 			$attributes['method'] = 'post';
 		}
-
+//Log::instance()->add(Log::NOTICE, Debug::vars($attributes));
 		return '<form'.HTML::attributes($attributes).'>';
 	}
 

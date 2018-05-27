@@ -1,6 +1,6 @@
 <?php
 
-class View_Admin_Main_Navigator
+class View_Useradmin_Main_Navigator
 {
 //	public $message;	
 	/**

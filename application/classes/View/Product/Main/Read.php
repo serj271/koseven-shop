@@ -47,27 +47,22 @@ class View_Product_Main_Read {
 		return Cart::GetCartId();
 	}
 	
-	public function values()
+	public function value()
 	{
-		$array 	= $this->item->object();
-		$labels = $this->item->labels();
-//		Log::instance()->add(log::NOTICE, Debug::vars( $labels, $array['uri']));		
-		$result = array();
-		
+		$item 	= $this->item->object();
+//		$labels = $this->item->labels();
+//		Log::instance()->add(log::NOTICE, Debug::vars( $item, $item['uri']));		
+			
 		$photo = $this->item->primary_photo()->as_array();			
 		$photo = Arr::map(array(array(__CLASS__,'addBase')), $photo, array('path_fullsize','path_thumbnail'));	
 		
-		$result[] = array(
-				'name' => $labels['name'],
-				'photo' =>$photo,
-				'id'	=>$this->item->id,
-		);
-		return $result;
+		$item['photo'] = $photo;		
+		
+		return $item;
 	} 
 	
-	
 	public static function addBase($url){
-			return URL::base().$url;			
+		return URL::base().$url;			
 	} 
 	
 }

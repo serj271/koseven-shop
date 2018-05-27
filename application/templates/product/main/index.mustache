@@ -4,66 +4,66 @@
  
 {{#result}}
     {{#rows}}
-	{{#product}}
-	    {{name}}
-		{{#photo}}
-		<img src={{path_fullsize}} />
-		    {{path_fullsize}}
-		{{/photo}}
-		{{# specifications}}
+		{{#product}}
+			{{name}}
+			{{#photo}}
+			<img src={{path_thumbnail}} />
+				{{path_fullsize}}
+			{{/photo}}
+			{{# specifications}}
+				<p>
+					specification name <a href="{{url_detail}}" > {{name}} </a>
+				</p>
+				<p>
+					specification value {{value}}
+				</p>
+			{{/ specifications}}
+			{{# reviews}}
 			<p>
-				specification name <a href="{{link}}" > {{name}} </a>
+				reviews date {{date}}
 			</p>
 			<p>
-				specification value {{value}}
+				reviews name {{name}}
 			</p>
-		{{/ specifications}}
-		{{# reviews}}
-		<p>
-			reviews date {{date}}
-		</p>
-		<p>
-			reviews name {{name}}
-		</p>
-		<p>
-			reviews rating {{rating}}
-		</p>
-		<p>
-			reviews summary  {{summary}}
-		</p>
-		<p>
-			reviews body {{body}}
-		</p>
-		
-		{{/ reviews}}
-		{{# variations}}
-			<dl class="dl-horizontal">	
-				{{#price}}
-				<dt>{{label}}</dt>
-				<dd>{{value}}</dd>
-				{{/price}}
-				{{#sale_price}}
-				<dt>{{label}}</dt>
-				<dd>{{value}}</dd>
-				{{/sale_price}}
-				{{#discounted_price}}
-				<dt>{{label}}</dt>
-				<dd>{{value}}</dd>
-				{{/discounted_price}}
-				{{#quantity}}
-				<dt>{{label}}</dt>
-				<dd>{{value}}</dd>
-				{{/quantity}}
+			<p>
+				reviews rating {{rating}}
+			</p>
+			<p>
+				reviews summary  {{summary}}
+			</p>
+			<p>
+				reviews body {{body}}
+			</p>
+			
+			{{/ reviews}}
+			{{# variations}}
+				<dl class="dl-horizontal">	
+					{{#price}}
+					<dt>{{label}}</dt>
+					<dd>{{value}}</dd>
+					{{/price}}
+					{{#sale_price}}
+					<dt>{{label}}</dt>
+					<dd>{{value}}</dd>
+					{{/sale_price}}
+					{{#discounted_price}}
+					<dt>{{label}}</dt>
+					<dd>{{value}}</dd>
+					{{/discounted_price}}
+					{{#quantity}}
+					<dt>{{label}}</dt>
+					<dd>{{value}}</dd>
+					{{/quantity}}
 
 
-			</dl>
-		{{/ variations}}
+				</dl>
+			{{/ variations}}
+			
 
-
-	{{/product}}
-	{{#basket}}
-	    <a class="btn {{class}}" href="{{url}}">{{text}}</a>
-	{{/basket}}
+		{{/product}}
+		{{#basket}}
+			<a class="btn {{class}}" href="{{url}}">{{text}}</a>
+		{{/basket}}
     {{/rows}}
 {{/result}}
 

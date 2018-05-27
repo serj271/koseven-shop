@@ -2,21 +2,18 @@
 	<h1>{{headline}}</h1>
 </div>
 
-<div class="well">
+<div>
 	{{#buttons}}
 	<a class="btn {{class}}" href="{{url}}">{{text}}</a>
 	{{/buttons}}
 </div>
-	{{#values}}
-	<div class="row">
-		<div class="span4">
-			<strong>{{name}}</strong>
-				{{#photo}}
-				<img src="{{path_fullsize}}" alt="" />
-				{{/photo}}
-		</div>
-		<div class="span4">{{value}}</div>
-		
-	</div>
-	{{/values}}
+	
+	
+{{#value}}
+	{{id}}
+	{{description}}
+	{{#photo}}
+		<img src="{{path_fullsize}}" alt="" />
+	{{/photo}}
+{{/value}}
 	

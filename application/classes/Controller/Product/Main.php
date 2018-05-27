@@ -15,47 +15,27 @@ class Controller_Product_Main extends Controller_Product {
 		$item_uri = $this->request->param('item_uri');
 		$model = 'Product';
 		$result = array();
-
-		if($item_uri)
-		{
-			$products_orm = ORM::factory($model)
-			->where('uri','=',$item_uri)
-			->find_all();	
-			foreach ($products_orm as $product){
-				$products_as_array = $product->as_array();				
-				$photo = $product->primary_photo()->as_array();
-				$controller = $this->request->controller();
-				$photo = Arr::map(array(array(__CLASS__,'addBase')), $photo, array('path_fullsize','path_thumbnail'));
-				$products_as_array['photo'] = $photo;
-				$reviews = $product->reviews->find()->as_array();
-				$specifications = $product->specifications->find()->as_array();
-				$products_as_array['specifications'] = $specifications;
-				$products_as_array['reviews'] = $reviews;
-				$result[] = $products_as_array;	
-			}
-//			$this->view->product = $result;
-//						$content_view->product = $result;					
-//						$content = $renderer->render($content_view);												
-//						$this->template->content = $content;						
-//						Log::instance()->add(Log::NOTICE,Debug::vars('result----',$controller));						
-		} else 
-		{
-			$pagination = Pagination::factory(array(
-				'items_per_page'=> 1,
-				'total_items' 	=> 3,
-			))->route_params(array(
-				'directory' 	=> $this->request->directory(),
-				'controller' 	=> $this->request->controller(),
-				'action'		=> $this->request->action(),
-				'pole'			=>'id',
-				'view'			=> 'pagination/basic',
-				));
+//		Log::instance()->add(Log::NOTICE,Debug::vars('item_uri----',$item_uri));
+		
+	
+		$products_count = ORM::factory('Product')->count_all();
+		
+		$pagination = Pagination::factory(array(
+			'items_per_page'=> 1,
+			'total_items' 	=> $products_count,
+		))->route_params(array(
+			'directory' 	=> $this->request->directory(),
+			'controller' 	=> $this->request->controller(),
+			'action'		=> $this->request->action(),
+			'pole'			=>'id',
+			'view'			=> 'pagination/basic',
+			));
 				
-			$products_orm = ORM::factory('Product')
-				->limit($pagination->items_per_page)
-				->offset($pagination->offset)
-				->order_by('id')
-				->find_all();
+		$products_orm = ORM::factory('Product')
+			->limit($pagination->items_per_page)
+			->offset($pagination->offset)
+			->order_by('id')
+			->find_all();	
 		
 			foreach ($products_orm as $product){
 				$products_as_array = $product->as_array();				
@@ -73,7 +53,8 @@ class Controller_Product_Main extends Controller_Product {
 			$this->view->pagination = $pagination;
 			$this->view->items = $products_orm;
 //			$this->view->product = $result;
-		} 
+		
+	
     }
 	
 	public function action_read()
@@ -82,7 +63,7 @@ class Controller_Product_Main extends Controller_Product {
 		$item = ORM::factory($this->_model)
 			->where('uri','=',$item_uri)
 			->find();			
-		
+//		Log::instance()->add(Log::NOTICE,Debug::vars('item----',$item));
 		if ( ! $item->loaded())
 		{
 			throw new HTTP_Exception_404(':model with ID :id doesn`t exist!',
@@ -102,12 +83,7 @@ class Controller_Product_Main extends Controller_Product {
 //					'directory'		=> $this->request->directory(),
 //					'controller' 	=> $this->request->controller(),					
 //				)));
-
-		}	
-
-//		}		
-
-	
+		}
 		$this->view->item = $item;
 	/* 	$this->view_navigator->message = __(':model with ID :id',
 				array(':model' => $this->_model, ':id' => $this->request->param('id'))); */
@@ -169,9 +145,9 @@ class Controller_Product_Main extends Controller_Product {
 			return URL::base().$url;			
 	} 
 	public static function createLink($uri){
-		$link = Route::get('product')->uri(array(
-			'directory' =>'product',
-			'controller' => 'main',
+		$link = Route::get('Product')->uri(array(
+			'directory' =>'Product',
+			'controller' => 'Main',
 			'action'     => 'read',
 			'item_uri' => $uri			
 		));//URL::site('product');
