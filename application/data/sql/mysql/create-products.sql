@@ -1,5 +1,5 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-/* use 'shop33'; */
+use 'shop';
 select 'product_reviews';
 SET FOREIGN_KEY_CHECKS=0;
 
