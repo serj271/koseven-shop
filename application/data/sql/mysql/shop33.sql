@@ -21,9 +21,9 @@ CREATE TABLE `catalog_categories` (
   `creator_id` int(10) NOT NULL DEFAULT '0',
   `updated` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `updater_id` int(10) NOT NULL DEFAULT '0',
-  `deleted` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  /* `deleted` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `deleter_id` int(10) NOT NULL DEFAULT '0',
-  `delete_bit` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `delete_bit` tinyint(1) unsigned NOT NULL DEFAULT '0', */
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

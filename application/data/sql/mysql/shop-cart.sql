@@ -1,7 +1,7 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-/* use 'shop33';
+use 'shop33';
 SET @basename := 'shop33';
- */
+
 DROP TABLE IF EXISTS `shopping_cart`;
 CREATE TABLE `shopping_cart` (
 	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,

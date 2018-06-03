@@ -146,7 +146,7 @@ Kohana::modules([
 	'csv'		=>MODPATH.'CSV-master',
 //	'menu'        	=> MODPATH.'menu', 
 //	'captcha'        	=> MODPATH.'captcha',  	
-	'ecommerce'	=> MODPATH.'oz-ecommerce',        // Object Relationship Mapping
+//	'ecommerce'	=> MODPATH.'oz-ecommerce',        // Object Relationship Mapping
 	'pagination'	=>MODPATH.'pagination',
 	'breadcrumbs'=> MODPATH.'breadcrumbs',
 	'message'=> MODPATH.'message',
@@ -155,7 +155,8 @@ Kohana::modules([
 //	'imagemagick' => MODPATH.'imagemagick',  // Image manipulation
 	'media'		=> MODPATH.'media',
 	'upload'	=> MODPATH.'kohana-upload-storage-master',   // Upload access
-	'catalog-shop'=> MODPATH.'catalog-shop',
+	'twig' => MODPATH.'twig',
+//	'catalog-shop'=> MODPATH.'catalog-shop',
 //	'admin'=>MODPATH.'admin',
 	]);
 

@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class View_Basket_Index {
+class View_Basket_Main_Index {
 	/**
 	 * Alias for the options column (helps separate it from the rest)
 	 */
@@ -179,8 +179,8 @@ class View_Basket_Index {
 			return	array(
 				'class' => 'large',
 				'text' => __('To product'),
-				'url' => Route::url('product', array(
-//					'directory' =>'user',
+				'url' => Route::url('Product', array(
+					'directory' =>'product',
 					'controller' => 'main',
 					'action' 	=> 'index',
 				)),

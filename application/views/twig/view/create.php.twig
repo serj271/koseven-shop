@@ -1,0 +1,113 @@
+{{php | raw}}
+
+class {{class}}
+{
+/**
+	 * @var	mixed	[Kostache|Formo] form
+	 */
+	public $form;
+	/**
+	 * @var	ORM		model
+	 */
+	public $item;	
+	/**
+	 * @var	array	validation errors
+	 */
+	public $errors;	
+	/*
+	* 
+	*/
+	public $id;
+//	protected $_template = 'admin/create';
+
+	public $model;
+
+	public function model()
+	{
+		return Inflector::humanize($this->model);
+	}	
+	/**
+	 * Returns the form for current view
+	 */
+	public function form()
+	{
+		if ( ! $this->form)
+		{
+			// Create a CSRF token field
+			$token = new View_Bootstrap_Form_Field('token', Security::token());
+			$token->type('hidden');
+			
+			$this->form = new View_Bootstrap_Modelform;
+			$this->form->action(strtolower($this->directory).'/'.strtolower($this->controller).'/'.$this->action);
+			$this->form->load($this->item);	
+
+			$model = ORM::factory('Employee_Enterprise');
+			$enterprise_id = $model
+				->find()
+				->id;
+			
+			$field_enterprise = $this->form->fields()['enterprise_id'];
+			$field_enterprise->value($enterprise_id);
+			$field_enterprise->attrs(array('onchange'=>'changeEnterprise()','id'=>'enterprise_id'));
+			$this->form->add($field_enterprise);
+			
+			$department_orm = ORM::factory('Employee_Department');
+			$options = $department_orm
+				->where('enterprise_id','=',$enterprise_id)
+				->order_by('title')
+				->find_all()->as_array($department_orm->primary_key(),'title');			
+			
+			$field_department = $this->form->fields()['department_id'];
+			$field_department->attrs(array('id'=>'department_id'));
+			$field_department->options($options);
+			$this->form->add($field_department);
+			
+			$field_email = $this->form->fields()['email_zimbra'];			
+			$field_email->value('u'.$this->item->tab_number.'@che.mrsk-ural.ru');		
+			$this->form->add($field_email);	
+
+			$field_ind = $this->form->fields()['ind'];
+			$field_ind->value('4');
+			$this->form->add($field_ind);
+			
+			$field_cat = $this->form->fields()['cat'];
+			$field_cat->value('спец.');
+			$this->form->add($field_cat);
+			
+			$this->form->add($token);
+			$this->form->remove('timestamp');
+			$this->form->remove('id');
+			$this->form->submit()->label(__('Create :model',
+				array(':model' => $this->model())));
+			
+			if ($this->errors)
+			{
+				$fields = $this->form->fields();
+				
+				foreach ($this->errors as $field => $error)
+				{
+					if ($field = Arr::get($fields, $field))
+					{
+						$field->error($error);
+					}
+				}
+			}
+		}
+		
+		return $this->form;
+	}
+	
+	/**
+	 * @return	string	Page headline
+	 */
+	public function headline()
+	{
+		return 'Create a new '.$this->model().' '.$this->tab_number;
+	}
+	
+   
+
+
+
+
+}

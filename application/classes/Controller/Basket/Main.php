@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Basket_Main extends Controller_Basket_Crud {
+class Controller_Basket_Main extends Controller_Basket {
 //    public $template ='main';
 	public $_model='Shopping_Cart';
 //    public $menu = 'menu.useradmin';

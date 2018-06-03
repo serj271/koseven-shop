@@ -1,0 +1,95 @@
+
+{{value}}
+
+
+
+
+
+{{viewBreadcrumbs}}
+
+
+{{# product}}	
+    {{{name}}
+    {{# photo}}
+	<img src={{path_fullsize}} />
+	{{path_fullsize}}
+    {{/ photo}}
+		{{# specifications}}
+			<p>
+				specification name <a href="{{link}}" > {{name}} </a>
+			</p>
+			<p>
+				specification value {{value}}
+			</p>
+		{{/ specifications}}
+		{{# reviews}}
+		<p>
+			reviews date {{date}}
+		</p>
+		<p>
+			reviews name {{name}}
+		</p>
+		<p>
+			reviews rating {{rating}}
+		</p>
+		<p>
+			reviews summary  {{summary}}
+		</p>
+		<p>
+			reviews body {{body}}
+		</p>
+		
+		{{/ reviews}}
+		{{# variations}}
+			<p>
+				price {{price}}
+			</p>
+			<p>
+				quantity {{quantity}}
+			</p>
+		{{/ variations}}
+		
+{{/ product}}
+{{# count_products}}
+    {{{pagination}}}
+{{/ count_products}}
+
+
+    <p>{{#linkUser}}{{name}}{{/linkUser}}</p>
+
+{{#bold}}
+{{name}}
+{{/bold}}
+
+
+    {{# categories}}
+	<a href={{link}}>{{title}}</a>
+	<p>{{title}}</p>
+    {{/ categories}}
+
+	{{# result}}
+		{{# rows}}
+			{{#category}}
+			{{title}}
+			{{#linkUser}}
+				{{{title}}
+			
+			{{/linkUser}}
+			
+		
+			{{/category}}
+			{{link}}
+			
+		{{/ rows}}
+	{{/ result}}
+	{{#anchor}}a
+	{{/anchor}}
+	
+	
+	
+	
+	
+	
+	
+	
+	

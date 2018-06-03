@@ -40,16 +40,17 @@ abstract class Controller_Basket extends Controller_Common_Basket {
 		if ($this->auto_view === TRUE)
 		{
 			list($view_name, $view_path) = static::find_view($this->request);
-//			Log::instance()->add(Log::NOTICE, Debug::vars($view_name, $view_path));
+			Log::instance()->add(Log::NOTICE, Debug::vars($view_name, $view_path));
 			
 			if (Kohana::find_file('classes', $view_path))
 			{			
 				$this->view = new $view_name();
 			}
 			list($view_name_navigator, $view_path_navigator) = static::find_view_navigator($this->request);
+			Log::instance()->add(Log::NOTICE, Debug::vars($view_name_navigator, $view_path_navigator));
 			if (Kohana::find_file('classes', $view_path_navigator))
 			{			
-//				$this->view_navigator = new $view_name_navigator();
+				$this->view_navigator = new $view_name_navigator();
 			}
 
 		}
@@ -170,40 +171,47 @@ abstract class Controller_Basket extends Controller_Common_Basket {
 	 */
 	public static function find_view(Request $request)
 	{
-		// Empty array for view name chunks
-		$view_name = array('View');
-		
+		$view_name = array('View');		
 		// If current request's route is set to a directory, prepend to view name
-		$request->directory() and array_push($view_name, $request->directory());
-		
+		if ($request->directory())
+		{
+			array_push($view_name, $request->directory());
+		}
+		if ($request->controller())
+		{
+			array_push($view_name, $request->controller());
+		}	
 		// Append controller and action name to the view name array
-		array_push($view_name, $request->action());
-		
+		$view_name[] = ucfirst($request->action());		
 		// Merge all parts together to get the class name
-		$view_name = implode('_', $view_name);
-		
+		$view_name = implode('_', $view_name);		
 		// Get the path respecting the class naming convention
-		$view_path = strtolower(str_replace('_', '/', $view_name));
+		$view_path = str_replace('_', DIRECTORY_SEPARATOR, $view_name);
 		
 		return array($view_name, $view_path);
 	}
 	public static function find_view_navigator(Request $request)
 	{
 		// Empty array for view name chunks
+//		Log::instance()->add(Log::NOTICE, Debug::vars($request->pole));
 		$view_name = array('View');		
 		// If current request's route is set to a directory, prepend to view name
-
-		$request->directory() and array_push($view_name, $request->directory(), $request->controller());
-		
+		if ($request->directory())
+		{
+			array_push($view_name, $request->directory());
+		}
+		if ($request->controller())
+		{
+			array_push($view_name, $request->controller());
+		}	
 		// Append controller and action name to the view name array
-		array_push($view_name, 'navigator');
-		
+//		$view_name[] = ucfirst($request->action());	
+		array_push($view_name, ucfirst('navigator'));
 		// Merge all parts together to get the class name
-		$view_name = implode('_', $view_name);
-		
+		$view_name = implode('_', $view_name);		
 		// Get the path respecting the class naming convention
-		$view_path = strtolower(str_replace('_', '/', $view_name));
-//		Log::instance()->add(Log::NOTICE, 'navig'.$view_name.$view_path);		
+		$view_path = str_replace('_', DIRECTORY_SEPARATOR, $view_name);
+		
 		return array($view_name, $view_path);
 	}
 

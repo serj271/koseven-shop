@@ -1,0 +1,187 @@
+{{defined | raw}}
+
+class {{class | raw}} extends {{extends | raw}}{
+ //   public $template ='main';
+	protected $_model = '{{model}}';
+	public function action_index()
+	{
+		
+		/* if ($this->request->method() === Request::POST)
+		{
+			list() = array_values(Arr::extract(
+				$this->request->post(), array(
+					
+				))
+			);
+			Cookie::set('navigation',$navigation);
+			$orders=array();
+			if(){
+				$order=$orders[$navigation];
+				$validation=Validation::factory(array($order=>$search));				
+				
+				if($validation->check()){
+					if($order == 'tab_number'){
+						$model = new Model_Employee();
+						$rows = $model->method();
+						$id = $rows->as_array()[0][''];
+						$this->redirect(Route::get($this->request->directory())
+							->uri(
+								array(
+									'controller'=>$this->request->controller(),
+									'action'=>'read',
+									'id'=>$id
+								)
+							));
+						
+					}
+						$this->redirect('personalviewer/sel/'.$navigation.'/'.$search);
+				} else {							
+					$errors = $validation->errors('validation_', TRUE);					
+					$error = $errors[$order];
+					$this->view_navigator->error = $error;
+					Log::instance()->add(Log::NOTICE, Debug::vars($errors	));				
+					$message=$data['errors']['room'];   					
+				} 
+			}			
+			Log::instance()->add(Log::NOTICE, Debug::vars());
+		}
+		
+		$this->template->navigator='ll';
+		$this->response->body('ok');
+		$this->template->content=$this->view;	 */	
+	}
+	public function action_read()
+	{
+		/* $item = ORM::factory($this->_model, $this->request->param('id'));
+		
+		if ( ! $item->loaded())
+		{
+			throw new HTTP_Exception_404(':model with ID :id doesn`t exist!',
+				array(':model' => $this->_model, ':id' => $this->request->param('id')));
+
+			$lang = Lang::instance()->get();
+			if($lang == 'ru'){
+				I18n::lang('ru');	
+			} else {
+				I18n::lang('en-us');		
+			}
+		    Message::error(__(':model with ID :id not exist!',
+				array(':model' => $this->_model, ':id' => $this->request->param('id'))));
+		$this->view_navigator->message = __(':model with ID :id not exist!',
+				array(':model' => $this->_model, ':id' => $this->request->param('id')));
+				$this->redirect(Route::get($this->request->directory())->uri(array(
+					'controller' 	=> 'index',
+					'action'		=> 'index',
+					'id'			=> $item->id,
+				)));		    
+		}		
+		$this->view->item = $item;
+		$this->view_navigator->message = __(':model with ID :id',
+				array(':model' => $this->_model, ':id' => $this->request->param('id'))); */
+	}
+	public function action_update()
+	{
+		/* $item = ORM::factory($this->_model, $this->request->param('id'));
+		
+		if ( ! $item->loaded())
+			throw new HTTP_Exception_404('Resource not found');
+			
+		if ($this->request->method() === Request::POST)
+		{
+			$validation = Validation::factory($this->request->post())
+				->rule('token','not_empty')
+				->rule('token','Security::check');
+				
+			try
+			{
+				$item->values($this->request->post())
+					->update($validation);
+
+				$this->redirect(Route::get($this->request->directory())//uppercase
+						->uri(
+							array(
+								'controller' 	=> strtolower($this->request->controller()),
+								'action'		=> 'read',
+								'id'			=> $item->id,
+							)
+						)
+				);
+			}
+			catch (ORM_Validation_Exception $e)
+			{
+				$this->view->errors = $e->errors('validation');
+			}
+		}
+			
+		$this->view->item = $item; */
+	}
+	
+	public function action_create()
+	{
+		/* $item = ORM::factory($this->_model);
+		
+		if ($this->request->method() === Request::POST)
+		{
+			Log::instance()->add(Log::NOTICE,Debug::vars(Lang::instance()->get()));
+			$validation = Validation::factory($this->request->post())
+				->rule('token','not_empty')
+				->rule('token','Security::check');
+				
+			try
+			{
+				$item->values($this->request->post())
+					->create($validation);
+					
+				$this->redirect(Route::get($this->request->directory())
+					->uri(array(
+						'controller' => strtolower($this->request->controller())
+					)
+				));
+			}
+			catch (ORM_Validation_Exception $e)
+			{
+				$this->view->errors = $e->errors('');
+				Log::instance()->add(Log::NOTICE,Debug::vars($e->errors()));
+			}
+		}
+		$this->view->tab_number = $tab_number;
+		$this->view->item = $item; */
+	}
+	
+	public function action_delete()
+	{/* 
+			$item = ORM::factory($this->_model, $this->request->param('id'));
+			
+			if ( ! $item->loaded())
+			{
+				throw new HTTP_Exception_404(ucfirst($this->_model).' doesn`t exist: :id', 
+					array(':id' => $this->request->param('id')));
+			}
+			
+			if ($this->request->method() === Request::POST)
+			{
+				$action = $this->request->post('action');
+				
+				if ($action !== 'yes')
+				{
+					$this->redirect(Route::get($this->request->directory())
+						->uri(array(
+							'controller' => strtolower($this->request->controller())
+						)
+					));
+				}
+				
+				$item->delete();
+				
+				$this->redirect(Route::get($this->request->directory())
+					->uri(array(
+						'controller' => strtolower($this->request->controller())
+					)
+				));
+			}
+			
+			$this->view->item = $item; */
+	}
+
+
+} // End 

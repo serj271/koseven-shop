@@ -46,7 +46,7 @@ abstract class Controller_Product extends Controller_Common_Product {
 			{			
 				$this->view = new $view_name();
 			}
-		/* 	list($view_name_navigator, $view_path_navigator) = static::find_view_navigator($this->request); */
+	 	list($view_name_navigator, $view_path_navigator) = static::find_view_navigator($this->request); 
 
 
 			/* if (Kohana::find_file('classes', $view_path_navigator))
@@ -61,16 +61,16 @@ abstract class Controller_Product extends Controller_Common_Product {
 			$this->view->action 	= $this->request->action();			
 			$this->view->directory = $this->request->directory();		
 			$this->view->controller = $this->request->controller();		
-			$this->view->action 	= $this->request->directory();		
+//			$this->view->action 	= $this->request->directory();		
 			$this->view->model 		= $this->_model;
 		}
-		/* if ($this->view_navigator)
+		 if ($this->view_navigator)
 		{
 			$this->view_navigator->action 	= $this->request->action();			
 			$this->view_navigator->controller = $this->request->controller();		
 			$this->view_navigator->action 	= $this->request->directory();		
 			$this->view_navigator->model 		= $this->_model;
-		} */
+		}
 		
 		
 		
