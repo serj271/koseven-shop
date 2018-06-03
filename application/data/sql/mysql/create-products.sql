@@ -1,6 +1,11 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+<<<<<<< HEAD
 use shop;
 
+=======
+use 'shop';
+select 'product_reviews';
+>>>>>>> 8712b12765bb410704c2af2dc54b22cbc3c6f09c
 SET FOREIGN_KEY_CHECKS=0;
 
 DROP TABLE IF EXISTS product_reviews;

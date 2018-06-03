@@ -1,5 +1,5 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-use 'shop33';
+use 'shop';
 
 CREATE TABLE IF NOT EXISTS `b8_words` (
 	`id` bigint unsigned NOT NULL auto_increment,
