@@ -1,0 +1,92 @@
+<?php
+
+class View_Adminmodel_Main_Update
+{
+	
+//	protected $_template = 'admin/update';
+
+	/**
+	 * @var	mixed	[Kostache|Formo] form
+	 */
+	public $form;
+
+	/**
+	 * @var	Model
+	 */
+	public $item;
+	
+	/**
+	 * @var	array	validation errors
+	 */
+	 
+	public $model;
+
+	public function model()
+	{
+		return Inflector::humanize($this->model);
+	}
+	 
+	 
+	public $errors;
+	
+	public function form()
+	{
+		if ( ! $this->form)
+		{
+			// Create a CSRF token field
+			$token = new View_Bootstrap_Form_Field('token', Security::token());
+			$token->type('hidden');
+			
+			// Create a bootstrap form, load the model and add the token field to it
+			$this->form = new View_Bootstrap_Modelform;
+			$this->form->load($this->item);
+			$filed_enterprise = $this->form->fields()['enterprise_id'];
+			$filed_enterprise->attrs(array('onchange'=>'changeEnterprise()','id'=>'enterprise_id'));
+			$this->form->add($filed_enterprise);
+			$enterprise_id = $this->form->fields()['enterprise_id']->value();
+			$department_orm = ORM::factory('Employee_Department');
+			$options = $department_orm
+				->where('enterprise_id','=',$enterprise_id)
+				->order_by('title')
+				->find_all()->as_array($department_orm->primary_key(),'title');
+			
+			$filed_department = $this->form->fields()['department_id'];
+			$filed_department->attrs(array('id'=>'department_id'));
+			$filed_department->options($options);
+			$this->form->add($filed_department);
+
+			$this->form->add($token);
+			$this->form->submit()->label(__('Update this :model',
+				array(':model' => $this->model())));
+			
+			if ($this->errors)
+			{
+				$fields = $this->form->fields();
+				
+				foreach ($this->errors as $field => $error)
+				{
+					if ($field = Arr::get($fields, $field))
+					{
+						$field->error($error);
+					}
+				}
+			}
+		}
+		
+		return $this->form;
+	}
+	
+	/**
+	 * @return	string	Page headline
+	 */
+	public function headline()
+	{
+		return 'Update '.$this->model().' #'.$this->item->id;
+	}
+	 
+   
+
+
+
+
+}

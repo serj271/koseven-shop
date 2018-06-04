@@ -14,7 +14,8 @@ class View_Adminmodel_Main_Navigator
 	/**
 	 * @var	array	validation errors
 	 */
-	public $errors;	
+	public $errors;
+	public $options;
 	/*
 	* 
 	*/
@@ -56,7 +57,8 @@ class View_Adminmodel_Main_Navigator
 			$navigation->type('select');
 			/* $navigation->value('rm');//selected
 			$navigation->attrs(array('class'=>'test'));//id, onchange */
-			$navigation->options(array('Product'=>'product','Catalog_Category'=>'Catalog_Category'));//value=>label
+//			$navigation->options(array('Product'=>'product','Catalog_Category'=>'Catalog_Category'));//value=>label
+			$navigation->options($this->options);
 			$this->form->add($navigation);
 			
 			$search = new View_Bootstrap_Form_Field('search');

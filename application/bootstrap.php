@@ -293,7 +293,7 @@ Route::set('Admin', 'admin(/<controller>(/<action>(/<id>)))',array('id'=>'[0-9]+
 		'action'     => 'index',
 	));
  
-Route::set('Adminmodel', 'adminmodel(/<model>(/<action>(/<id>)))',array('id'=>'[0-9]+'))
+Route::set('Adminmodel', 'adminmodel(/<action>(/<model>(/<id>)))',array('id'=>'[0-9]+'))
 	->defaults(array(
 		'directory' =>'Adminmodel',
 		'controller' => 'Main',
@@ -308,8 +308,8 @@ Route::set('Adminmodel', 'adminmodel(/<model>(/<action>(/<id>)))',array('id'=>'[
 			$uri = rtrim($uri, '/');
 			$asParts = @ explode('/',$uri);
 			$prefix = @ $asParts[0];//adminmodel
-			$model = @ $asParts[1];
-			$action = @ $asParts[2];
+			$action = @ $asParts[1];
+			$model = @ $asParts[2];
 			$id = @ $asParts[3];
 	
 			$models = Kohana::$config->load('adminmodel.models');
@@ -319,9 +319,10 @@ Route::set('Adminmodel', 'adminmodel(/<model>(/<action>(/<id>)))',array('id'=>'[
 			
 			$params['directory'] =	'Adminmodel';		
 			$params['controller'] = 'Main';		
-			$params['action'] = 'index';					
-//			$params['item_uri'] = $item_uri;
-		Log::instance()->add(Log::NOTICE, Debug::vars($params,$uri,$model,array_keys($models)));
+			$params['action'] = $action;			
+			$params['model'] = $model;
+			$params['id'] = $id;
+//		Log::instance()->add(Log::NOTICE, Debug::vars($params,$uri,$model,array_keys($models)));
 			return $params;			
 		}
 	); 

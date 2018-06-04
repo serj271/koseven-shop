@@ -1,12 +1,17 @@
-{{php}}
+{{php | raw}}
 
 class Model_{{model}} extends ORM {
+protected $_table_name = 'image';
+protected $_primary_key = 'id';
+
 protected $_has_many = array(
 		
 	);
 
 	protected $_table_columns = array(
-		
+	{% for key, value in table_columns %}
+		'{{ key }}'=>'{{value.column_name}}',
+	{% endfor %}
 
 	);
 	
@@ -22,7 +27,14 @@ protected $_has_many = array(
 	public function rules()
 	{
 		return array(
-			
+		{% for key, value in table_columns %}
+		'{{ key }}'=>array(
+			array('not_empty',array(':value')),
+			{% if value.type == 'int' %}
+			array('digit'),
+			{% endif %}
+			),
+		{% endfor %}
 
 		);
 	}

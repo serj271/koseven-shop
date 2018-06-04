@@ -4,50 +4,57 @@ class Task_Product_Createmodel extends Minion_Task {
 
 	protected $_options = array(
 		// param name => default value
-		'action'   => 'index',
-		'controller'=> 'department',
+		'table_name'=>'product_description'
 	);
-
-	private $enterprises = array();
-	private $departments = array();
-	private $employees = array();
 	
 	protected function _execute(array $params)
-	{				
-		/* $enterprise_orm = ORM::factory('Employee_Enterprise');				
-		$department_orm = ORM::factory('Employee_Department'); */
- 
+	{ 
 // var_dump($employee);
 		$directory = 'Product';
-		$controller = $params['controller'];
-		$action = $params['action'];		
-		$model = 'Product_Description';
-		$table_name = 'product_description';
+		
+		$table_name = $params['table_name'];		
+//		$model = 'Product_Description';
+		
 		$path_model ='classes/Model';
 		
+		$db = Database::instance();
+		$list_columns = $db->list_columns($db->table_prefix().$table_name);
+		$array = array();
+		
+		$array = explode("_", $table_name);
+		$array = array_map(__CLASS__.'::upper', $array);
+		$model = implode('_', $array);
+		
+		// Get the path respecting the class naming convention
+		$model_class = str_replace('_', DIRECTORY_SEPARATOR, $model); 
 		
 		$file_controller_tpl = 'Template';
-		$model_class = 'Desc';
+//		$model_class = 'Desc';
 		
 		$twig = Twig::factory( 'twig/model/'.$file_controller_tpl);
+		$twig->php = "<?php defined('SYSPATH') or die('No direct access allowed.');";
 		$twig->model = $model;
+		
+		$twig->table_columns = $list_columns;
+		
 		$file = Kohana::find_file($path_model, $model_class,'php');//if exist source file
+
 		if($file === FALSE){
 			$file_out = fopen(APPPATH.$path_model.'/'.$model_class.'.php', 'w') or die('Error opening file: '+$file_name); 
-			fclose($file_out);			
+			fclose($file_out);
+			$file = Kohana::find_file($path_model, $model_class,'php');//if exist source file			
 		}
-//		$file = Kohana::find_file($path_model, $model_class,'php');
+
 		$content = $twig->render();
 		file_put_contents($file, $content);//create controller
 		
 		Minion_CLI::write('create model product description -');
 		
-		$db = Database::instance();
-		$list_columns = $db->list_columns($db->table_prefix().$table_name);
 		
-		ORM::factory('Product_Description');
 		
-//		Log::instance()->add(Log::NOTICE, Debug::vars($list_columns));
+//		ORM::factory('Product_Description');
+		
+
 		
 		
 		
@@ -164,8 +171,10 @@ class Task_Product_Createmodel extends Minion_Task {
 //		Minion_CLI::write('create template conroller ok -');
 	}
 	
-	
-	
+		
+	public static function upper($v){
+		return ucfirst($v);
+	}
 	
 	
 	

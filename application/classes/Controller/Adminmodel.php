@@ -21,7 +21,7 @@ abstract class Controller_Adminmodel extends Controller_Common_Adminmodel {
 			->headers('x-xss-protection','1; mode=block');			
 		// Check if user is allowed to continue
 //		static::check_permissions($this->request);
-		
+
 		// Automatically figure out the ViewModel for the current action 
 		if ($this->auto_view === TRUE)
 		{
@@ -52,6 +52,7 @@ abstract class Controller_Adminmodel extends Controller_Common_Adminmodel {
 			$this->view_navigator->directory 	= $this->request->directory();			
 			$this->view_navigator->action 	= $this->request->directory();		
 			$this->view_navigator->model 		= $this->_model;
+			$this->view_navigator->options = Kohana::$config->load('adminmodel.models');
 		}
 
 	}
