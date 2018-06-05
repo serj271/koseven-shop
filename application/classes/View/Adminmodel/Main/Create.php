@@ -33,12 +33,12 @@ class View_Adminmodel_Main_Create
 	{
 		if ( ! $this->form)
 		{
-			// Create a CSRF token field
+//			Create a CSRF token field
 			$token = new View_Bootstrap_Form_Field('token', Security::token());
 			$token->type('hidden');
 			
 			$this->form = new View_Bootstrap_Modelform;
-			$this->form->action(strtolower($this->directory).'/'.strtolower($this->controller).'/'.$this->action);
+			$this->form->action(strtolower($this->directory).'/'.$this->action.'/'.$this->model);
 			$this->form->load($this->item);	
 
 			
@@ -70,7 +70,7 @@ class View_Adminmodel_Main_Create
 	 */
 	public function headline()
 	{
-		return 'Create a new '.$this->model().' '.$this->tab_number;
+		return 'Create a new '.$this->model();
 	}
 	
    

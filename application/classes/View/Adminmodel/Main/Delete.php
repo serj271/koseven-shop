@@ -2,7 +2,7 @@
 
 class View_Adminmodel_Main_Delete
 {
-protected $_template = 'admin/delete';
+//protected $_template = 'admin/delete';
 
 	/**
 	 * @var	ORM		model

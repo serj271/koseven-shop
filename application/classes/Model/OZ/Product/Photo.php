@@ -70,7 +70,7 @@ abstract class Model_OZ_Product_Photo extends ORM {
 			}
 			catch (Exception $e)
 			{
-				Kohana::$log->add(Log::WARNING, $e->getMessage());
+//				Kohana::$log->add(Log::WARNING, $e->getMessage());
 			}
 		}
 

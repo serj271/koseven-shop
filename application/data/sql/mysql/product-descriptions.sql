@@ -3,8 +3,8 @@ use shop;
 
 SET FOREIGN_KEY_CHECKS=0;
 
-DROP TABLE IF EXISTS product_description;
-CREATE TABLE `product_description` (
+DROP TABLE IF EXISTS product_descriptions;
+CREATE TABLE `product_descriptions` (
 	`id` int(10) unsigned NOT NULL AUTO_INCREMENT,
 	`product_id` int(10) unsigned NOT NULL,
 	`language_id` int(10) unsigned NOT NULL,

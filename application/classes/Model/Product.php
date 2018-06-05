@@ -44,7 +44,7 @@ protected $_has_many = array(
 			'name' => __('name of product'),
 			'uri' => 'uri',
 			'description' => __('description of product'),		
-			'primary_photo_id' => 'Keywords tag',
+			'primary_photo_id' => 'photo id',
 			'avg_review_rating' => 'Avg_review_rating tag',
 		);
 	}
@@ -67,6 +67,11 @@ protected $_has_many = array(
 			'visible' => array(
 				array('digit'),
 			),
+			'avg_review_rating' => array(
+				array('not_empty'),
+				array('digit'),
+			),
+
 			'uri' => array(
 				array('min_length', array(':value', 2)),
 				array('max_length', array(':value', 255)),

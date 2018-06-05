@@ -44,6 +44,7 @@ abstract class Controller_Adminmodel extends Controller_Common_Adminmodel {
 			$this->view->controller = $this->request->controller();			
 			$this->view->directory 	= $this->request->directory();		
 			$this->view->model 	= $this->_model;
+			$this->view->options = Kohana::$config->load('adminmodel.models');
 		}
 		if ($this->view_navigator)
 		{
@@ -52,7 +53,7 @@ abstract class Controller_Adminmodel extends Controller_Common_Adminmodel {
 			$this->view_navigator->directory 	= $this->request->directory();			
 			$this->view_navigator->action 	= $this->request->directory();		
 			$this->view_navigator->model 		= $this->_model;
-			$this->view_navigator->options = Kohana::$config->load('adminmodel.models');
+			
 		}
 
 	}

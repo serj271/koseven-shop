@@ -2,7 +2,7 @@
 
 class View_Adminmodel_Main_Read
 {
-public $model;
+	public $model;
 
 	public function model()
 	{
@@ -24,18 +24,20 @@ public $model;
 			array(
 				'class' => 'large success',
 				'text' => 'Update',
-				'url' => Route::url('Useradmin', array(
+				'url' => Route::url('Adminmodel', array(
 					'controller' 	=> strtolower($this->controller),
 					'action' 		=> 'update',
+					'model'			=> $this->model,
 					'id' 			=> $this->item->id,
 				)),
 			),
 			array(
 				'class' => 'large error',
 				'text' => 'Delete',
-				'url' => Route::url('Useradmin', array(
+				'url' => Route::url('Adminmodel', array(
 					'controller' 	=> $this->controller,
 					'action' 		=> 'delete',
+					'model'			=> $this->model,
 					'id' 			=> $this->item->id,
 				)),
 			),
@@ -60,7 +62,7 @@ public $model;
 		
 		$result = array();
 		
-		$model = ORM::factory('Employee');
+//		$model = ORM::factory('Employee');
 //		Log::instance()->add(Log::NOTICE, Debug::vars($model->find()->enterprise->title, $model->has_many(),array_keys($model->belongs_to())));
 		
 		foreach ($array as $field => $value)
