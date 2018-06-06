@@ -36,16 +36,38 @@ class Controller_Adminmodel_Main extends Controller_Adminmodel {
 		if(empty($this->request->param('model'))){
 			throw new HTTP_Exception_404('model doesn`t exist!');
 		}
-		$model = ORM::factory($this->request->param('model'));
+		$model_orm = ORM::factory($this->request->param('model'));
+		if($this->request->method() === Request::POST)
+		{
+			$post=array_map('trim',$this->request->post());
+			$keys=array('entries','search');
+			$last_input=Arr::extract($post,$keys,NULL); 
+			$entries = $last_input['entries'];
+			$items = $model_orm
+				->where($entries,'=',2)
+				->find_all()
+				->as_array();
+			Log::instance()->add(Log::NOTICE,Debug::vars('model-post---',$entries,$items));		
+			
+			
+			$this->redirect(Route::get($this->request->directory())		
+					->uri(
+						array(
+							'directory' =>'Adminmodel',
+							'controller' => 'Main',
+							'action'     => 'index',
+//							'model'		=>$model,
+//							'id'		=>2
+						)
+					)					
+			);
+		}
 		
+//		Log::instance()->add(Log::NOTICE, Debug::vars($model->belongs_to(),$model->table_columns()));
 		
-//		Log::instance()->add(Log::NOTICE, Debug::vars($model->belongs_to(),$model->table_columns()));		
-		
-		
-		
-		$this->view->belongs_to = $model->belongs_to();		
+		$this->view->belongs_to = $model_orm->belongs_to();		
 		$this->view->model = $this->request->param('model');
-		$this->view->table_columns = $model->table_columns();
+		$this->view->table_columns = $model_orm->table_columns();
 //		$this->view->item = $item;
 		$this->view->message = __(':model with ID :id',
 				array(':model' => $this->request->param('model'), ':id' => $this->request->param('id')));

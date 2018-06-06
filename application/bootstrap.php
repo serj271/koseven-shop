@@ -302,8 +302,7 @@ Route::set('Adminmodel', 'adminmodel(/<action>(/<model>(/<id>)))',array('id'=>'[
 	->filter(
 		function(Route $route, $params, Request $request) 			
 		{
-//			Log::instance()->add(Log::NOTICE, Debug::vars('route++',$route, $params));
-		
+//			Log::instance()->add(Log::NOTICE, Debug::vars('route++',$route, $params));		
 			$uri = $request::detect_uri();
 			$uri = rtrim($uri, '/');
 			$asParts = @ explode('/',$uri);

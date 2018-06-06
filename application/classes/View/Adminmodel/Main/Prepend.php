@@ -11,7 +11,6 @@ class View_Adminmodel_Main_Prepend {
 	/**
 	 * @var	array	Field names to create table columns out of
 	 */
-//	protected $_includables = array('name','title','email');
 	protected $_includables = array('name','description');//for display columns from table 
 	/**
 	 * @var	mixed	[Kostache|Formo] form
@@ -31,16 +30,41 @@ class View_Adminmodel_Main_Prepend {
 
 	public $model;
 	
-	protected $_columns;
+	protected $_options;
 
 	public function model()
 	{
 		return Inflector::humanize($this->model);
 	}
-	public function columns()
+	public function create_button()
 	{
-		if ($this->_columns !== NULL)
-			return $this->_columns;
+		return array(
+			'url' => Route::url('Adminmodel', array(
+				'controller' 	=> $this->controller,
+				'action'		=> 'create',
+				'model'			=> $this->model
+			)),
+			'text' => 'Create  new id to '.$this->model(),
+		);
+	}
+	public function buttons()
+	{
+		return array(
+			array(
+				'class' => 'large success',
+				'text' =>'Create '.$this->model(),
+				'url' => Route::url('Adminmodel', array(
+				'controller' 	=> $this->controller,
+				'action'		=> 'create',
+				'model'			=> $this->model
+			)),
+			),
+		);
+	} 
+	public function options()
+	{
+		if ($this->_options !== NULL)
+			return $this->_options;
 		
 		// Create an empty model to get info from
 		$model = ORM::factory($this->model);
@@ -48,53 +72,14 @@ class View_Adminmodel_Main_Prepend {
 		$columns 	= $model->table_columns();		
 		$labels 	= $model->labels();
 		
-		$result 	= array(
-			// Always include the primary key
-			 array(
-				'alias' => $model->primary_key(),
-				'name' 	=> 'ID',
-			),
-		);
-		
-		// Also include some default columns - if they exist
-		foreach ($this->_includables as $includable)
+		foreach ($columns as $key=>$value)
 		{
-			if (isset($columns[$includable]))
-			{
-				$label = Arr::get($labels, $includable, $includable);
+				$label = Arr::get($labels, $key, $key);
 				
-				$result[] = array(
-					'alias' => $includable,
-					'name' 	=> ucfirst($label),
-				);
-			}
+				$result[$key] = ucfirst($label);
+				
 		}
 		
-		// Include the created column - if it exists
-		if ($created = $model->created_column())
-		{
-			$result[] = array(
-				'type'	=> 'created_column',
-				'alias' => $created['column'],
-				'name' 	=> 'Created',
-			);
-		}
-		
-		// Include the updated column - if it exists
-		if ($updated = $model->updated_column())
-		{
-			$result[] = array(
-				'type'	=> 'updated_column',
-				'alias' => $updated['column'],
-				'name' 	=> 'Last update',
-			);
-		}
-		
-		// Append the options array the last
-		$result[] = array(
-			'alias' => static::OPTIONS_ALIAS,
-			'name'	=> 'Options',
-		);
 //		Log::instance()->add(Log::NOTICE, Debug::vars($this->_includables));		
 		return $this->_columns = $result;
 	} 
@@ -108,13 +93,32 @@ class View_Adminmodel_Main_Prepend {
 			// Create a CSRF token field
 			$token = new View_Bootstrap_Form_Field('token', Security::token());
 			$token->type('hidden');
-				Log::instance()->add(Log::NOTICE, Debug::vars($this->columns()));
+//				Log::instance()->add(Log::NOTICE, Debug::vars($this->options()));
 			
 			$this->form = new View_Bootstrap_Form();//action
+			$action = Route::get('Adminmodel')->uri(
+				array(
+					'controller' 	=> $this->controller,
+					'action'		=> $this->action,
+					'model'			=> $this->model
+				)
+			);
+			$this->form->action($action);
 //			$this->form->load($this->item);			
 			$this->form->add($token);
 			
-			$this->form->submit()->label(__('Create new  :model',
+			$entries = new View_Bootstrap_Form_Field('entries','entries');
+			$entries->type('select');
+			$entries->attrs(array('class'=>'select'));//onchange
+			$entries->options($this->options());
+			$this->form->add($entries);
+			
+			$search = new View_Bootstrap_Form_Field('search');
+			$search->type('text');
+			$search->label('search');
+			$this->form->add($search);
+			
+			$this->form->submit()->label(__('Read  :model',
 				array(':model' => $this->model())));
 			
 			if ($this->errors)
