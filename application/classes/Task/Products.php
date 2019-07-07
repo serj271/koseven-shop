@@ -27,22 +27,13 @@ class Task_Products extends Minion_Task {
 		$this->catalog_id = 0;
 		$this->level = 0;
 		
-		$modals = array('Product','Product_Photo','Product_Specification',
+		$models = array('Product','Product_Photo','Product_Specification',
 		'Product_Categories_Product','Catalog_Category','Product_Category');
-		foreach($modals as $modal){
-			$this->clear_model($modal);
+		foreach($models as $model){
+			$this->clear_model($model);
 		}			
-			
-		$this->clear_model();
+
 		$this->clear_model('Catalog_Category');
-			
-		$this->create_product(
-			$name='name product'.$this->product_id,
-			$description='description product'.$this->product_id,
-			$uri='uri_product_'.$this->product_id,
-			$product_id = $this->product_id,
-			$photo_id = $this->product_id
-		);
 	
 		$this->create_catalog_category(
 			$title = 'catalog_category title'.$this->catalog_category_id,
@@ -59,12 +50,6 @@ class Task_Products extends Minion_Task {
 			$catalog_category_id = $this->catalog_id,//parent id
 			$level = 1
 		);
-		$this->add_category(1, $this->catalog_id);//product_id catalog_category_id
-		
-		$this->product_id = 2;
-		$this->photo_id =2;
-		$this->parent_id = 2;
-			
 		$this->create_product(
 			$name='name product'.$this->product_id,
 			$description='description product'.$this->product_id,
@@ -72,7 +57,20 @@ class Task_Products extends Minion_Task {
 			$product_id = $this->product_id,
 			$photo_id = $this->product_id
 		);
-		$this->add_category(2, $this->catalog_id);//product_id catalog_category_id
+//		$this->add_category(1, $this->catalog_id);//product_id catalog_category_id
+		
+		$this->product_id = 2;
+		$this->photo_id =2;
+		$this->parent_id = 2;
+			
+		/* $this->create_product(
+			$name='name product'.$this->product_id,
+			$description='description product'.$this->product_id,
+			$uri='uri_product_'.$this->product_id,
+			$product_id = $this->product_id,
+			$photo_id = $this->product_id
+		); */
+//		$this->add_category(2, $this->catalog_id);//product_id catalog_category_id
 		
 		/* $this->create_product($this->product_id,$this->photo_id);
 		$this->create_photo($this->product_id,$this->photo_id);
@@ -263,7 +261,7 @@ class Task_Products extends Minion_Task {
 		try
 		{			
 			$product = $products_orm->save();		
-//			Log::instance()->add(Log::NOTICE, Debug::vars($product->id));
+			Log::instance()->add(Log::NOTICE, Debug::vars($product->id));
 			Minion_CLI::write('id create  products_orm- '.$products_orm->id);
 			$this->create_photo($this->product_id,$this->photo_id);
 			$this->product_reviews($this->product_id);
@@ -271,7 +269,7 @@ class Task_Products extends Minion_Task {
 			$this->create_variation($this->product_id);
 			
 		}
-		 catch (ORM_Validation_Exception $e)
+		catch (ORM_Validation_Exception $e)
 		{
 			$errors = $e->errors();
 			

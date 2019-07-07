@@ -76,8 +76,8 @@ abstract class Kohana_Database {
 
 			// Create the database connection instance
 			$driver = new $driver($name, $config);
+
 			// Store the database instance
-//Log::instance()->add(Log::NOTICE, Debug::vars($driver));
 			Database::$instances[$name] = $driver;
 		}
 
@@ -205,6 +205,7 @@ abstract class Kohana_Database {
 	 * @return  integer  number of affected rows for all other queries
 	 */
 	abstract public function query($type, $sql, $as_object = FALSE, array $params = NULL);
+
 	/**
 	 * Start a SQL transaction
 	 *

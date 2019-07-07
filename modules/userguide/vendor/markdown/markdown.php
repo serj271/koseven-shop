@@ -1420,7 +1420,7 @@ class Markdown_Parser {
 			# Ampersand-encoding based entirely on Nat Irons's Amputator
 			# MT plugin: <http://bumppo.net/projects/amputator/>
 			$text = preg_replace('/&(?!#?[xX]?(?:[0-9a-fA-F]+|\w+);)/', 
-								'&amp;', $text);;
+								'&amp;', $text);
 		}
 		# Encode remaining <'s
 		$text = str_replace('<', '&lt;', $text);

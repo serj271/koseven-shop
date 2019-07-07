@@ -1,6 +1,6 @@
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-use 'shop33';
-SET @basename := 'shop33';
+use 'koseven_personal';
+SET @basename := 'koseven_personal';
 
 DROP TABLE IF EXISTS `shopping_cart`;
 CREATE TABLE `shopping_cart` (

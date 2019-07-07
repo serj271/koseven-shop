@@ -310,9 +310,6 @@ class Kohana_HTML {
 		$compiled = '';
 		foreach ($attributes as $key => $value)
 		{
-#		    if($key === 'action'){
-#		    Log::instance()->add(Log::NOTICE, Debug::vars($key, $value));
-#}
 			if ($value === NULL)
 			{
 				// Skip attributes that have NULL values

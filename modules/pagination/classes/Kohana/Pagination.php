@@ -102,6 +102,7 @@ class Kohana_Pagination {
 		// Add controller and action to route params for routes with variable controllers and actions
 		$this->_route_params['controller'] = $request->controller();
 		$this->_route_params['action'] = $request->action();
+		$this->_route_params['directory'] = $request->directory();
 
 		// Pagination setup
 		$this->setup($config);
@@ -227,11 +228,11 @@ class Kohana_Pagination {
 		{
 			case 'query_string':
 				return URL::site($this->_route->uri($this->_route_params).
-					$this->query([$this->config['current_page']['key'] => $page]),$protocol=NULL, $index=FALSE);
+					$this->query([$this->config['current_page']['key'] => $page]));
 
 			case 'route':
 				return URL::site($this->_route->uri(array_merge($this->_route_params,
-					[$this->config['current_page']['key'] => $page])).$this->query(),$protocol=NULL, $index=FALSE);
+					[$this->config['current_page']['key'] => $page])).$this->query());
 		}
 
 		return '#';

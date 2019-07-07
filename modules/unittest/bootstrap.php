@@ -38,20 +38,20 @@ define('EXT', '.php');
  * this bootstrap file somewhere else then you'll need to modify this value to 
  * compensate.
  */
-define('DOCROOT', realpath(dirname(__FILE__).'/../../').DIRECTORY_SEPARATOR);
+define('DOCROOT', realpath(__DIR__.'/../../').DIRECTORY_SEPARATOR);
 
 /**
  * Set the PHP error reporting level. If you set this in php.ini, you remove this.
  * @link http://www.php.net/manual/errorfunc.configuration#ini.error-reporting
  *
  * When developing your application, it is highly recommended to enable notices
- * and strict warnings. Enable them by using: E_ALL | E_STRICT
+ * and warnings. Enable them by using: E_ALL
  *
- * In a production environment, it is safe to ignore notices and strict warnings.
- * Disable them by using: E_ALL ^ E_NOTICE
+ * In a production environment, it is safe to ignore notices. Disable them by
+ * using: E_ALL & ~E_NOTICE
  *
- * When using a legacy application with PHP >= 5.3, it is recommended to disable
- * deprecated notices. Disable with: E_ALL & ~E_DEPRECATED
+ * When using a legacy application, it is recommended to disable deprecated
+ * notices. Disable with: E_ALL & ~E_DEPRECATED
  */
 error_reporting(E_ALL & ~E_DEPRECATED);
 
@@ -121,28 +121,6 @@ if (($ob_len = ob_get_length()) !== FALSE)
 	}
 }
 
-// Preset cache config if not set
-$cache_config = Kohana::$config->load('cache');
-
-if (($cache_config->get('default') === NULL AND $cache_config->get('file') === NULL) OR
-	($cache_config->get('default') === 'file' AND $cache_config->get('file') === NULL))
-{
-	$cache_config->set(
-		'file',
-		[
-			'driver' => 'file',
-			'cache_dir' => APPPATH.'cache',
-			'default_expire' => 3600,
-			'ignore_on_delete' => [
-				'file_we_want_to_keep.cache',
-				'.gitignore',
-				'.git',
-				'.svn'
-			]
-		]
-	);
-}
-
 // Enable all modules we can find
 $modules_iterator = new DirectoryIterator(MODPATH);
 
@@ -158,4 +136,4 @@ foreach ($modules_iterator as $module)
 
 Kohana::modules($modules);
 
-unset($cache_config, $modules_iterator, $modules, $module);
+unset($modules_iterator, $modules, $module);

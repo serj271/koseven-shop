@@ -20,8 +20,6 @@ class Kohana_CacheTest extends Unittest_TestCase {
 	 */
 	public function provider_instance()
 	{
-		$tmp = realpath(sys_get_temp_dir());
-
 		$base = [];
 
 		if (Kohana::$config->load('cache.file'))
@@ -40,11 +38,11 @@ class Kohana_CacheTest extends Unittest_TestCase {
 			];
 		}
 
-		return $base + [
+		return $base + [[
 			// Test bad group definition
 			Kohana_CacheTest::BAD_GROUP_DEFINITION,
 			'Failed to load Kohana Cache group: 1010'
-		];
+		]];
 	}
 
 	/**
@@ -63,7 +61,7 @@ class Kohana_CacheTest extends Unittest_TestCase {
 		catch (Cache_Exception $e)
 		{
 			$this->assertSame($expected, $e->getMessage());
-			throw $e;
+			return;
 		}
 
 		$this->assertInstanceOf(get_class($expected), $cache);

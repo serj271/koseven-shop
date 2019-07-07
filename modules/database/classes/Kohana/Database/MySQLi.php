@@ -148,16 +148,6 @@ class Kohana_Database_MySQLi extends Database {
 		}
 	}
 
-	public function next_result()
-	{
-		// Make sure the database is connected
-		$this->_connection or $this->connect();
-
-
-		// Execute the query
-		$this->_connection->next_result();
-	}
-
 	public function query($type, $sql, $as_object = FALSE, array $params = NULL)
 	{
 		// Make sure the database is connected
@@ -195,7 +185,6 @@ class Kohana_Database_MySQLi extends Database {
 		if ($type === Database::SELECT)
 		{
 			// Return an iterator of results
-//			Log::instance()->add(Log::NOTICE, Debug::vars($as_object));
 			return new Database_MySQLi_Result($result, $sql, $as_object, $params);
 		}
 		elseif ($type === Database::INSERT)

@@ -98,13 +98,13 @@ abstract class Kohana_Image {
 		{
 			// Get the real path to the file
 			$file = realpath($file);
-//			Log::instance()->add(log::NOTICE, Debug::vars($file));
+
 			// Get the image information
 			$info = getimagesize($file);
 		}
 		catch (Exception $e)
 		{
-			// Ignore all errors while reading the image			
+			// Ignore all errors while reading the image
 		}
 
 		if (empty($file) OR empty($info))

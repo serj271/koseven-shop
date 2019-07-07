@@ -114,7 +114,7 @@ class Controller_User_Auth extends Controller_User {
 			$extra = Validation::factory($external_values)
 				->rule('password_confirm', 'matches', array(':validation', ':field', 'password'));
 			$captcha = Arr::get($_POST, 'captcha');
-			Log::instance()->add(Log::NOTICE, Debug::vars(Captcha::valid($captcha)));
+//			Log::instance()->add(Log::NOTICE, Debug::vars(Captcha::valid($captcha)));
 			if(Captcha::valid($captcha)){
 				try
 				{
